@@ -1,73 +1,80 @@
 <html>
-    <head>
-        <!-- Program modified from https://www.tutorialspoint.com/webgl/webgl_drawing_a_triangle.htm-->
-        <title>WebGL</title>
-    </head>
-    <body>
-        <canvas width = "600" height = "600" id = "Canvas"></canvas>
-        <script>
-            context = document.getElementById('Canvas').getContext('webgl');
-            context.clearColor(0, 0, 0, 1); // write canvas color into buffer
-            context.clear(context.COLOR_BUFFER_BIT); //write-out / scan-out of buffer
+  <head>
+    <!-- Program modified from https://www.tutorialspoint.com/webgl/webgl_drawing_a_triangle.htm-->
+    <title>WebGL</title>
+  </head>
+  <body>
+    <canvas width="600" height="600" id="Canvas"></canvas>
+    <script>
+      context = document.getElementById("Canvas").getContext("webgl");
 
-            var vertices = [
-                -0.5,-0.5,0.0,
-                0,0.5,0.0,
-                0.5,-0.5,0.0, 
-            ];
-            indices = [0,1,2];
+      context.clearColor(0, 0, 0, 1); // write canvas color into buffer
+      context.clear(context.COLOR_BUFFER_BIT); //write-out / scan-out of buffer
 
-            var vertex_buffer = context.createBuffer(); //empty buffer to be used as vertex buffer
-            context.bindBuffer(context.ARRAY_BUFFER, vertex_buffer); //define buffer as array_buffer to save vertex informations
-            context.bufferData(context.ARRAY_BUFFER, new Float32Array(vertices), context.STATIC_DRAW); //write vertices into buffer; define as static to be used multiple times
-            context.bindBuffer(context.ARRAY_BUFFER, null); // Unbind buffer
+      var vertices = [-0.5, -0.5, 0.0, 0, 0.5, 0.0, 0.5, -0.5, 0.0];
+      indices = [0, 1, 2];
 
-            //vertex shader source code
-            var vertex_code =
-                'attribute vec3 coordinates;' +
-                'void main(void) {' +
-                    'gl_Position = vec4(coordinates, 1.0);' +
-                '}';
+      var vertex_buffer = context.createBuffer(); //empty buffer to be used as vertex buffer
+      context.bindBuffer(context.ARRAY_BUFFER, vertex_buffer); //define buffer as array_buffer to save vertex informations
+      context.bufferData(
+        context.ARRAY_BUFFER,
+        new Float32Array(vertices),
+        context.STATIC_DRAW
+      ); //write vertices into buffer; define as static to be used multiple times
+      context.bindBuffer(context.ARRAY_BUFFER, null); // Unbind buffer
 
-            var vertex_shader = context.createShader(context.VERTEX_SHADER); // Create vertex shader object
-            context.shaderSource(vertex_shader, vertex_code); // attach shader code with shader object
-            context.compileShader(vertex_shader); // Compile vertex shader
+      //vertex shader source code
+      var vertex_code =
+        "attribute vec3 coordinates;" +
+        "void main(void) {" +
+        "gl_Position = vec4(coordinates, 1.0);" +
+        "}";
 
-            //fragment shader source code
-            var fragment_code =
-                'void main(void) {' +
-                    ' gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);' +
-                '}';
+      var vertex_shader = context.createShader(context.VERTEX_SHADER); // Create vertex shader object
+      context.shaderSource(vertex_shader, vertex_code); // attach shader code with shader object
+      context.compileShader(vertex_shader); // Compile vertex shader
 
-            var fragment_shader = context.createShader(context.FRAGMENT_SHADER); // Create fragment shader object
-            context.shaderSource(fragment_shader, fragment_code); // attach shader code with shader object
-            context.compileShader(fragment_shader); // Compile fragment shader
-         
-            var shader_program = context.createProgram();
-            context.attachShader(shader_program, vertex_shader); //attach shader to program
-            context.attachShader(shader_program, fragment_shader); //attach shader to program
-            context.linkProgram(shader_program); // link programs
-            
-            context.useProgram(shader_program); //use program
+      //fragment shader source code
+      var fragment_code =
+        "void main(void) {" + " gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);" + "}";
 
-            var index_buffer = context.createBuffer();
-            context.bindBuffer(context.ELEMENT_ARRAY_BUFFER, index_buffer); //bind index buffer
-            context.bufferData(context.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), context.STATIC_DRAW); //write indices into buffer
-            context.bindBuffer(context.ELEMENT_ARRAY_BUFFER, null); //unbind buffer
+      var fragment_shader = context.createShader(context.FRAGMENT_SHADER); // Create fragment shader object
+      context.shaderSource(fragment_shader, fragment_code); // attach shader code with shader object
+      context.compileShader(fragment_shader); // Compile fragment shader
 
-            context.bindBuffer(context.ARRAY_BUFFER, vertex_buffer); // Bind vertex buffer object
-            context.bindBuffer(context.ELEMENT_ARRAY_BUFFER, index_buffer); // Bind index buffer object
-            
-            var coord = context.getAttribLocation(shader_program, "coordinates"); // Get the attribute location
+      var shader_program = context.createProgram();
+      context.attachShader(shader_program, vertex_shader); //attach shader to program
+      context.attachShader(shader_program, fragment_shader); //attach shader to program
+      context.linkProgram(shader_program); // link programs
 
-            context.vertexAttribPointer(coord, 3, context.FLOAT, false, 0, 0); // Point an attribute to the currently bound VBO
-            
-            context.enableVertexAttribArray(coord); // Enable the attribute
+      context.useProgram(shader_program); //use program
 
-            context.clearColor(0, 0, 0, 1); // write canvas color into buffer
-            context.clear(context.COLOR_BUFFER_BIT); //write-out / scan-out of buffer
-            context.drawElements(context.TRIANGLES, indices.length, context.UNSIGNED_SHORT,0); // Draw the triangle
+      var index_buffer = context.createBuffer();
+      context.bindBuffer(context.ELEMENT_ARRAY_BUFFER, index_buffer); //bind index buffer
+      context.bufferData(
+        context.ELEMENT_ARRAY_BUFFER,
+        new Uint16Array(indices),
+        context.STATIC_DRAW
+      ); //write indices into buffer
+      context.bindBuffer(context.ELEMENT_ARRAY_BUFFER, null); //unbind buffer
 
-        </script>
-    </body>
+      context.bindBuffer(context.ARRAY_BUFFER, vertex_buffer); // Bind vertex buffer object
+      context.bindBuffer(context.ELEMENT_ARRAY_BUFFER, index_buffer); // Bind index buffer object
+
+      var coord = context.getAttribLocation(shader_program, "coordinates"); // Get the attribute location
+
+      context.vertexAttribPointer(coord, 3, context.FLOAT, false, 0, 0); // Point an attribute to the currently bound VBO
+
+      context.enableVertexAttribArray(coord); // Enable the attribute
+
+      context.clearColor(0, 0, 0, 1); // write canvas color into buffer
+      context.clear(context.COLOR_BUFFER_BIT); //write-out / scan-out of buffer
+      context.drawElements(
+        context.TRIANGLES,
+        indices.length,
+        context.UNSIGNED_SHORT,
+        0
+      ); // Draw the triangle
+    </script>
+  </body>
 </html>
