@@ -2,6 +2,7 @@
   "name": "iaweb2022g1-survey",
   "private": true,
   "workspaces": [
+    "shared",
     "webgl-simple",
     "webgpu-simple"
   ],

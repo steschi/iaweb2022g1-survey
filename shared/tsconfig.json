@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "composite": true,
+    "typeRoots": ["../node_modules/@webgpu/types", "../node_modules/@types"],
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -9,16 +11,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true
   },
-  "references": [
-    {
-      "path": "../shared"
-    }
-  ],
   "include": ["src"]
 }

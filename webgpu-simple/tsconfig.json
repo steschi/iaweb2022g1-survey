@@ -16,5 +16,10 @@
     "noImplicitReturns": true,
     "skipLibCheck": true
   },
+  "references": [
+    {
+      "path": "../shared"
+    }
+  ],
   "include": ["src"]
 }

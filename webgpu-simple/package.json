@@ -12,5 +12,8 @@
     "typescript": "^4.6.4",
     "vite": "^3.2.3",
     "@webgpu/types": "^0.1.23"
+  },
+  "dependencies": {
+    "shared": "*"
   }
 }

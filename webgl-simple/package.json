@@ -1,5 +1,5 @@
 {
-  "name": "webgl-simple",
+  "name": "simple-webgl",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,5 +11,8 @@
   "devDependencies": {
     "typescript": "^4.6.4",
     "vite": "^3.2.3"
+  },
+  "dependencies": {
+    "shared": "*"
   }
 }
