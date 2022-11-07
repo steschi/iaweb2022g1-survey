@@ -1,0 +1,14 @@
+{
+  "name": "iaweb2022g1-survey",
+  "private": true,
+  "workspaces": [
+    "webgl-simple",
+    "webgpu-simple"
+  ],
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  },
+  "scripts": {
+    "lint": "yarn prettier --write ."
+  }
+}
