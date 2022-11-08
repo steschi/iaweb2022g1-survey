@@ -15,5 +15,5 @@ fn vertex_main(@location(0) position: vec2<f32>, @location(1) color: vec3<f32>) 
 
 @fragment
 fn fragment_main(@location(0) color: vec4<f32>) -> @location(0) vec4<f32> {
-    return color; // color
+    return color;
 }
