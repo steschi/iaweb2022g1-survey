@@ -17,6 +17,11 @@
   resolved "https://registry.yarnpkg.com/@webgpu/types/-/types-0.1.23.tgz#de1f1a9b4c6cc91c1b7b45198d19fd912076a738"
   integrity sha512-SxHrhOTH1C7EcbnVZ3DzzliQs10QJO19GoUtzVJLIqDD0VeAdtxLEoNnP5zkCDKyMFvx3ptU7jESdaOIUqAuJg==
 
+babylonjs@^5.32.1:
+  version "5.32.1"
+  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-5.32.1.tgz#526b50e43d7b7394884d9ca708216ed3cf5a8e81"
+  integrity sha512-MXuIu2NIIDHQq+IyO4vWUfqsvnDxQRWofGC4LQXAYvfp5N8w2veHcycNbhB48s4PTm5BHHr+GiYOm61asS5PDg==
+
 esbuild-android-64@0.15.13:
   version "0.15.13"
   resolved "https://registry.yarnpkg.com/esbuild-android-64/-/esbuild-android-64-0.15.13.tgz#5f25864055dbd62e250f360b38b4c382224063af"

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Babylon.js Example</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      canvas {
+        width: 100%;
+        height: calc(100vh - 10px);
+        overflow: clip;
+      }
+      #fps {
+        position: absolute;
+        background-color: black;
+        text-align: center;
+        font-size: 20px;
+        color: white;
+        top: 0;
+        left: 0px;
+        width: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="fps">0</div>
+    <canvas id="canvas"></canvas>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

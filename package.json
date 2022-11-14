@@ -4,7 +4,8 @@
   "workspaces": [
     "shared",
     "webgl-simple",
-    "webgpu-simple"
+    "webgpu-simple",
+    "babylon-js-example"
   ],
   "devDependencies": {
     "prettier": "^2.7.1"
