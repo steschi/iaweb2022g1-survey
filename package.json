@@ -5,7 +5,8 @@
     "shared",
     "webgl-simple",
     "webgpu-simple",
-    "babylon-js-example"
+    "babylon-js-example",
+    "threejs-example"
   ],
   "devDependencies": {
     "prettier": "^2.7.1"
