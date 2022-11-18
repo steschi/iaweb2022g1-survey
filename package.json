@@ -6,7 +6,8 @@
     "webgl-simple",
     "webgpu-simple",
     "babylon-js-example",
-    "threejs-example"
+    "threejs-example",
+    "rust-example"
   ],
   "devDependencies": {
     "prettier": "^2.7.1"
