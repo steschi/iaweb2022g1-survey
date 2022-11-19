@@ -2,13 +2,14 @@
 
 These commands can be executed in the root folder
 
-| Command | Description                               |
-| ------- | ----------------------------------------- |
-| `yarn`  | install dependencies and setup workspaces |
+| Command     | Description                               |
+| ----------- | ----------------------------------------- |
+| `yarn`      | install dependencies and setup workspaces |
+| `yarn lint` | lint the entire workspace using prettier  |
 
 ## useful commands inside workspaces
 
-These commands can be executed in a workspace folder (`webgpu-simple`, `webgl-simple`)
+These commands can be executed in a workspace folder (`babylon-js-example`, `rust-example`, `threejs-example`, `webgl-simple`, `webgpu-simple`)
 
 | Command        | Description                      |
 | -------------- | -------------------------------- |
