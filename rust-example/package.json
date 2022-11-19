@@ -4,15 +4,21 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "wasm": "wasm-pack build ./wasm --target web",
-    "dev": "yarn wasm && vite",
+    "wasm": "cross-env RUSTFLAGS=--cfg=web_sys_unstable_apis wasm-pack build ./wasm --target web",
+    "wasm-hmr": "chokidar \"./wasm/src\" \"**/*.toml\" -c \"yarn wasm\" --initial --debounce 500",
+    "dev": "concurrently \"yarn wasm-hmr\" \"vite\"",
     "build": "yarn wasm && tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
     "@webgpu/types": "^0.1.23",
+    "chokidar": "^3.5.3",
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^7.5.0",
+    "cross-env": "^7.0.3",
     "typescript": "^4.6.4",
     "vite": "^3.2.3",
+    "vite-plugin-full-reload": "^1.0.4",
     "vite-plugin-wasm-pack": "^0.1.12"
   }
 }

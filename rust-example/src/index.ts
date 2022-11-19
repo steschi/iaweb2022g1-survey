@@ -1,6 +1,6 @@
-import init, { greet } from "wasm";
+import init, { main } from "wasm";
 
 init().then(() => {
-  console.log("wasm initialized");
-  greet();
+  console.log("wasm module initialized");
+  main();
 });

@@ -1,0 +1,6 @@
+{
+  // This explicit link to the `Cargo.toml` file is needed because rust-analyzer only looks for the
+  // file in the root and first sub-directory due to a forced timeout by VSCode.
+  // See https://github.com/rust-lang/rust-analyzer/issues/7268 for details.
+  "rust-analyzer.linkedProjects": ["${workspaceFolder}/rust-example/wasm/Cargo.toml"]
+}

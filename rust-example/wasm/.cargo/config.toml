@@ -1,0 +1,4 @@
+[build]
+# This line assures that cargo (and rust-analyzer) know that we're building for wasm.
+# It's needed to give blocks guarded with  #[cfg(target_arch = "wasm32)] proper highlighting.
+target = "wasm32-unknown-unknown"
