@@ -4,3 +4,6 @@ build/
 .cache/
 external/
 public/
+**/wasm32-unknown-unknown
+**/wasm/target
+**/wasm/pkg
