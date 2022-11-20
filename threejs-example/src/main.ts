@@ -21,8 +21,8 @@ let mouse_pos_raw: THREE.Vector3;
 let selectedObject;
 let raycaster: THREE.Raycaster;
 let hover_over_col = 0xffffff;
-let hover_original_col: Color = [];
-let lines: THREE.Line = [];
+let hover_original_col: THREE.Color[] = [];
+let lines: THREE.Line[] = [];
 
 //init function and call to init because else it will always initialize those things
 init();
