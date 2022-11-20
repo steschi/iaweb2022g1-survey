@@ -87,6 +87,7 @@ function init() {
   mouse_pos = new THREE.Vector3();
   mouse_pos_raw = new THREE.Vector3();
   raycaster = new THREE.Raycaster();
+  raycaster.params.Line.threshold = 0.2;
 
   //Add EventListener
   renderer.domElement.addEventListener("mousemove", onMouseMove);
