@@ -1,0 +1,1081 @@
+%----------------------------------------------------------------
+%
+%  File    :  survey.tex
+%
+%  Author  :  Keith Andrews, ISDS, TU Graz, Austria
+%
+%  Created :  24 Mar 2010
+%
+%  Changed :  22 Jan 2021
+%
+%----------------------------------------------------------------
+
+
+\documentclass[11pt,onecolumn,twoside]{report}
+
+\usepackage[
+  a4paper,
+  twoside,
+  top=5mm,                % top margin
+  bottom=7mm,             % bottom margin
+  inner=20mm,             % inner margin (next to binding)
+  outer=20mm,             % outer margin (opposite binding)
+  bindingoffset=10mm,     % on binding side
+  includeheadfoot,        % include head(er) and foot(er)
+  headheight=10mm,        % height of header
+  headsep=15mm,           % sep between header and text body
+  footskip=15mm,          % sep between body and baseline of footer
+  footnotesep = 10mm plus 2mm minus 0mm  % bottom of body to top of footnote
+]{geometry}
+% A4 paper is w=210m, h=297mm
+
+
+\newcommand{\thistitle}{Responsive Data Visualization}  % title
+\newcommand{\thissubject}{}  % leave empty for no subject
+\newcommand{\thisauthor}{Thomas Pinheiro de Souza, Stefan Schintler and Andreas Steinkellner}          % author
+% \newcommand{\thisauthor}{Keith Andrews, Tom Black, and Harry White}      % multiple authors
+\newcommand{\thiskeywords}{survey paper, skeleton, guidelines, template}   % keywords
+
+\newcommand{\thisdate}{04 Dec 2022}  % date of this version
+\newcommand{\thisyear}{2022}         % year of this version
+
+
+
+
+\newcommand{\fullh}{24cm}         % height of figures for 1 per page
+\newcommand{\halfh}{9.5cm}        % height of figures for 2 per page
+\newcommand{\thirdh}{6cm}         % height of figures for 3 per page
+
+
+\setlength{\parindent}{1em}       % less indentation
+\setlength{\parskip}{5pt plus 1pt minus 1pt}  % space before a paragraph
+
+
+% \tolerance is set by LaTeX to 200
+% \sloppy sets \tolerance = 9999
+% which allows LaTeX more tolerance in adding word spacing
+
+% \sloppy
+% \fussy
+% \tolerance = 1000
+
+\tolerance=400 
+% makes some lines with lots of white space, but      
+% tends to prevent words from sticking out in the margin
+
+
+
+\setcounter{tocdepth}{3}        % lowest section level entered in ToC
+\setcounter{secnumdepth}{3}     % lowest section level still numbered
+
+
+
+
+\usepackage[T1]{fontenc}        % 8-bit output chars (must be before inputenx)
+\usepackage[utf8]{inputenx}     % input char encoding
+
+\usepackage[english,austrian,british]{babel}
+
+\usepackage{newtxtext}          % newer times fonts
+\usepackage{newtxmath}
+
+\usepackage{relsize}            % relative font sizes \smaller \larger
+\usepackage{float}              % H for float placement
+\usepackage{setspace}           % line spacing
+
+\usepackage{textcomp}           % symbols such as \texttimes and \texteuro
+\usepackage{latexsym}
+\usepackage{fontawesome}        % fontawesome symbols
+
+\usepackage{siunitx}            % prettier number formatting
+\sisetup{%
+  group-separator={,},
+}
+\usepackage[super]{nth}         % 1st, 2nd, 3rd, etc.
+
+\usepackage{xspace}
+\usepackage{xstring}            % string manipulation macros
+\usepackage{xparse}             % commands with optional arguments
+\usepackage{etoolbox}           % for \newrobustcmd
+\usepackage{makecmds}           % for \makecommand
+\usepackage{calc}               % for math calculations
+
+\usepackage[svgnames,table,xcdraw]{xcolor}
+\definecolor{darkgreen}{rgb}{0.0,0.2,0.0}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.2}
+\definecolor{darkred}{rgb}{0.2,0.0,0.0}
+\definecolor{verylightgrey}{gray}{0.95}
+\definecolor{lightgrey}{gray}{0.9}
+\definecolor{grey}{gray}{0.7}
+\definecolor{black}{gray}{0.0}
+
+\definecolor{tableheadercolour}{gray}{0.8}
+\definecolor{tablerowcolour}{gray}{0.93}
+
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{tabularx}
+
+% Define some new column types for tables:
+% like X but flushleft (= raggedright) rather than justified
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+% a p column but flushleft (= raggedright) rather than justified
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+% a p column but flushright (= raggedleft) rather than justified
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+
+\usepackage{booktabs}           % nicer tables
+
+\newcommand{\tablestretch}
+{\renewcommand{\arraystretch}{1.20}}  % spacing between table rows
+
+
+
+
+\usepackage{verbdef}            % define robust verb strings
+\usepackage{verbatim}
+\usepackage{comment}
+
+
+
+% better lists
+\usepackage{enumitem}
+
+\setlist{
+  topsep=0pt,
+  partopsep=0pt,
+  parsep=0.6ex,
+  itemsep=1.2ex,
+  left=\parindent .. 2\parindent,    % bullet .. start ot text
+}
+
+\setlist[description]{
+  style=sameline,
+}
+
+
+
+
+\usepackage{listings}                 % for listings of source code
+
+\makeatletter
+\newlength{\numwidth}%
+\setlength{\numwidth}{\widthof{\normalfont{\lst@numberstyle{99}}}}% Up to 2-digit (99) line numbers
+\def\lst@PlaceNumber{%
+  \makebox[\numwidth+1em][l]{%
+    \makebox[\numwidth][r]{\normalfont\lst@numberstyle{\thelstnumber}}%
+  }%
+}
+\makeatother
+
+% lstset strategy: define defaults here for
+% all non-floating (displayed) listings
+% floated listings override these settings later
+
+\lstset{                              % set parameters for listings
+  floatplacement=tp,                  % default float placement
+  numberbychapter,
+  inputencoding=utf8,
+  language=,                          % empty = plain text
+  basicstyle=\small\ttfamily,
+  tabsize=2,
+  xleftmargin=2\parindent,
+  xrightmargin=2\parindent,
+  frame=none,
+  framexleftmargin=0mm,
+  rulesepcolor=\color{verylightgrey},
+  numbers=none,
+  numberstyle=\scriptsize,
+  numbersep=2ex,
+  breaklines,
+  showtabs=false,
+  showspaces=false,
+  showstringspaces=false,
+  keywordstyle=\color{black},
+  commentstyle=\color{SteelBlue},
+  identifierstyle=,
+  stringstyle=,
+  captionpos=b,
+  abovecaptionskip=\abovecaptionskip,
+  belowcaptionskip=\belowcaptionskip,
+  extendedchars=true,           % listings usually only support 7-bit ascii chars
+  literate=%                    % map some one-byte utf8 chars for use in listings
+%    { }{{~}}1                   % non-breaking space
+    {©}{{\textcopyright}}1
+    {€}{{\texteuro}}1
+    {Ö}{{\"O}}1
+    {Ä}{{\"A}}1
+    {Ü}{{\"U}}1
+    {ß}{{\ss}}1
+    {ö}{{\"o}}1
+    {ä}{{\"a}}1
+    {ü}{{\"u}}1,
+}
+
+
+\lstdefinelanguage{biblatex}   % based on biblatex v 2.7a from 2013-07-14
+{
+  keywords={%
+    @article,@book,@mvbook,@inbook,@bookinbook,@suppbook,%
+    @booklet,@collection,@mvcollection,@incollection,@suppcollection,%
+    @manual,@misc,@online,@patent,@periodical,@suppperiodical,%
+    @proceedings,@mvproceedings,@inproceedings,@reference,@mvreference,%
+    @inreference,@report,@set,@thesis,@unpublished,@xdata,%
+    @conference,@electronic,@mastersthesis,@phdthesis,@techreport,@www,%
+    @artwork,@audio,@bibnote,@commentary,@image,@jurisdiction,@legislation,%
+    @legal,@letter,@movie,@music,@performance,@review,@software,%
+    @standard,@video%
+  },
+  sensitive=false,
+  comment=[l][\itshape]{@comment},
+  morecomment=[l]{\%},
+}
+
+\lstdefinelanguage{CSS}
+{
+  alsoletter={-},
+  morekeywords={%
+  color,background,background-color,margin,padding,font,
+  font-family,weight,%
+  display,position,top,left,right,bottom,list,%
+  style,border,size,white,space,min,width%
+  },
+  sensitive=false,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+}
+
+
+
+
+
+\usepackage[compact,nobottomtitles,pagestyles,explicit]{titlesec}
+% when using explicit, must explicitly include #1 for titlename
+
+% nobottomtitles
+% move section headings close to page bottom to next page
+\renewcommand{\bottomtitlespace}{2cm}
+
+% \chaptermark sets the value of \chaptertitle for later
+% \@chapapp is defined as \chaptername outside the appendix,
+% and as \appendixname within the appendix.
+\makeatletter
+\titleformat{\chapter}
+[display]                                            % shape
+{\chaptermark{\thechapter~~#1}\sffamily\bfseries}    % format
+{\huge\@chapapp\ \thechapter}                        % label
+{4ex}                                                % sep
+{\Huge#1}                                            % before-code
+\makeatother
+
+\titleformat{name=\chapter,numberless}
+[block]                                              % shape
+{\chaptermark{#1}\sffamily\bfseries}                 % format
+{}                                                   % label
+{0ex}                                                % sep
+{\Huge#1}                                            % before-code
+
+\titleformat{\section}
+{\normalfont\Large\sffamily\bfseries}{\thesection}{0.8em}{#1}
+
+\titleformat{\subsection}
+{\normalfont\large\sffamily\bfseries}{\thesubsection}{0.8em}{#1}
+
+\titleformat{\subsubsection}
+{\normalfont\normalsize\sffamily\bfseries}{\thesubsubsection}{0.8em}{#1}
+
+\titleformat{\paragraph}[runin]
+{\normalfont\normalsize\sffamily\bfseries}{\theparagraph}{0.8em}{#1}
+
+\titleformat{\subparagraph}[runin]
+{\normalfont\normalsize\sffamily\bfseries}{\thesubparagraph}{0.8em}{#1}
+
+
+% vertical spacing before and after section titles
+\titlespacing*{\section}
+{0pt}{3.5ex plus 0.5ex minus 0.5ex}{0ex plus 0ex minus 0.2ex}
+
+\titlespacing*{\subsection}
+{0pt}{2.5ex plus 0.5ex minus 0.5ex}{0ex plus 0ex minus 0.2ex}
+
+\titlespacing*{\subsubsection}
+{0pt}{2ex plus 0.5ex minus 0.5ex}{0ex plus 0ex minus 0.2ex}
+
+
+% define page headings how I want them
+
+\newpagestyle{main}[\small]{
+% \addtolength\headheight{6.7pt}
+% \headrule
+\sethead%
+[{\parbox[t]{0.3\textwidth}%                    % even left
+  {\sffamily\thepage}}]
+[]%                                             % even centre
+[{\parbox[t]{0.6\textwidth}%                    % even right
+  {\raggedleft\sffamily\chaptertitle}}]
+{{\parbox[t]{0.6\textwidth}%                    % odd left
+  {\sffamily\sectiontitle}}}%
+{}%                                             % odd centre
+{{\parbox[t]{0.3\textwidth}%                    % odd right
+  {\raggedleft\sffamily\thepage}}}
+}
+
+
+
+
+\usepackage{titletoc}
+
+% \contentsmargin{2.55em}
+
+\titlecontents{chapter}%
+[1.5em]%                         % left indent to entry text
+{\addvspace{1em}\bfseries}%      % above-code per entry
+{\contentslabel{1.5em}}%         % format for numbered entry
+{\hspace*{-1.5em}}%              % format for unnumbered entry
+{\hfill\contentspage}%           % [no dots] and page num per entry
+
+
+% Note: \dottedcontents is short form of \titlecontents
+
+\dottedcontents{section}%
+[3.8em]%                         % left indent to entry text = 1.5 + 2.3
+{}%                              % above-code per entry
+{2.3em}%                         % label width
+{1pc}%                           % space around the dots
+
+\dottedcontents{subsection}%
+[7.4em]%                         % left indent to entry text = 3.8 + 3.6
+{}%                              % above-code per entry
+{3.6em}%                         % label width
+{1pc}%                           % space around the dots
+
+
+\dottedcontents{figure}%         % LoF entries
+[3.0em]%                         % left indent to entry text = 3.8 + 3.6
+{}%                              % above-code per entry
+{3.0em}%                         % label width
+{1pc}%                           % space around the dots
+
+\dottedcontents{table}%          % LoT entries
+[3.0em]%                         % left indent to entry text = 3.8 + 3.6
+{}%                              % above-code per entry
+{3.0em}%                         % label width
+{1pc}%                           % space around the dots
+
+
+
+% List of Listings is unknown to titletoc, define here
+
+% Add extra per-chapter space to LoL to mimic LoF and LoT
+% (requires package etoolbox)
+\makeatletter
+\patchcmd{\@chapter}% <cmd>
+  {\addtocontents}% <search>
+  {\addtocontents{lol}{\protect\addvspace{10\p@}}% add per-chapter space
+   \addtocontents}% <replace>
+  {}{}% <success><failure>
+\makeatother
+
+% Configure LoL to mimic LoF and LoT
+\contentsuse{lstlisting}{lol}
+
+\titlecontents{lstlisting}%
+[3.0em]%                              % left indent
+{\addvspace{1.5mm}}%                  % above-code per entry
+{\contentslabel{3.0em}}%              % format for numbered entry
+{\hspace*{-3.0em}}%                   % format for unnumbered entry
+{\titlerule*[1pc]{.} \contentspage}%  % dots and page num per entry
+[]%                                   % below-code per entry
+
+\renewcommand{\lstlistlistingname}{List of Listings}
+
+
+
+
+
+
+% sensible settings for floats
+
+\setlength{\textfloatsep}{9mm plus 2mm minus 2mm}
+\setlength{\floatsep}{9mm plus 2mm minus 2mm}
+\setlength{\intextsep}{9mm plus 2mm minus 2mm}
+
+\setlength{\dbltextfloatsep}{9mm plus 2mm minus 2mm}
+\setlength{\dblfloatsep}{9mm plus 2mm minus 2mm}
+
+\setlength{\abovecaptionskip}{4mm plus 2mm minus 1mm}
+\setlength{\belowcaptionskip}{2mm plus 1mm minus 1mm}
+
+
+% See http://www-rohan.sdsu.edu/~aty/bibliog/latex/floats.html
+% See https://robjhyndman.com/hyndsight/latex-floats/
+
+\setcounter{topnumber}{2}               % max num floats at top of page
+\setcounter{dbltopnumber}{2}            % max num floats on 2col page
+\setcounter{bottomnumber}{2}            % max num floats at bottom of page
+\setcounter{totalnumber}{4}             % max num floats on a page
+
+\renewcommand{\topfraction}{0.8}        % max fraction of floats at top
+\renewcommand{\dbltopfraction}{0.9}     % max fraction of floats at top 2col
+\renewcommand{\bottomfraction}{0.8}     % max fraction of floats at bottom
+\renewcommand{\textfraction}{0.2}       % min fraction of text
+
+% only for entirely float pages:
+\renewcommand{\floatpagefraction}{0.7}      % min page fraction having floats
+\renewcommand{\dblfloatpagefraction}{0.7}   % min 2col page fraction having floats
+
+
+% \usepackage[section,above,below]{placeins}  % keep floats to their own section
+
+
+
+
+% use caption and subfig (caption2 and subfigure are now obsolete)
+
+\usepackage[
+  position=bottom,
+  margin=1cm,
+  font=small,
+  labelfont={bf,sf},
+  format=plain,
+  indention=5mm,
+  aboveskip=4mm,
+  belowskip=0mm,
+]{caption,subfig}
+
+\captionsetup[subfigure]{
+  margin=0pt,
+  parskip=0pt,
+  indention=5mm,
+  farskip=4mm,            % skip above subfig (assuming captions at bottom)
+  captionskip=2mm,        % skip between subfig and subcaption
+}
+
+
+
+
+\usepackage[short]{datetime}   % load datetime *after* babel, requires fmtcount
+% \newdateformat{britdate}{%
+% \ordinaldate{\THEDAY} \,\monthname[\THEMONTH] \THEYEAR
+% }
+\newdateformat{unixdate}{%
+\twodigit{\THEDAY}~\shortmonthname[\THEMONTH]~\THEYEAR
+}
+
+
+
+\usepackage[
+  autostyle=true,          % adapt quote style to current language
+  english=british,         % british english as default
+  threshold=1,             % set block quotations >1 line in display mode
+  maxlevel=4,              % max nesting level
+]{csquotes}
+
+\usepackage[
+  indentfirst=false,
+  vskip=0pt,               % by default would be \topsep + \partopsep.
+]{quoting}
+
+% tell csquotes to use quoting environment
+% for \displayquote and \blockquote
+\SetBlockEnvironment{quoting}
+
+% if cite is issued by a csquote command
+\renewcommand{\mkcitation}[1]{\space#1}
+
+% I prefer double quotes as outer
+\DeclareQuoteStyle{keithbritish}%  [variant]{style}
+  {\textquotedblleft}%                      opening outer mark
+  {\textquotedblright}%                     closing outer mark
+  [0.05em]%
+  {\textquoteleft}%                         opening inner mark
+  {\textquoteright}%                        closing inner mark
+
+\ExecuteQuoteOptions{style=keithbritish}
+
+
+
+
+
+\usepackage[
+  backend=biber,
+%  style=ext-authoryear-comp,   % defined in biblatex-ext package
+  style=ext-authoryear,        % defined in biblatex-ext package
+  sorting=nyt,
+  useprefix,                   % van and von are part of second name
+  mergedate=false,             % only for authoryear style
+  dashed=false,                % only for authoryear style
+  abbreviate=false,
+  maxcitenames=2,              % if > 2 authors,
+  mincitenames=1,              % use first 1 then et al
+  maxbibnames=99,              % if > 99 authors,
+  minbibnames=6,               % use first 6 then et al
+  uniquelist=minyear,
+  uniquename=init,
+  hyperref=true,
+  backref=true,
+  backrefstyle=two,
+  sortlocale=en,
+]{biblatex}
+
+
+
+% set for csquotes, but \autocite only available
+% after biblatex is loaded
+\SetCiteCommand{\autocite}    % or maybe \parencite
+
+% more space between entries in bib
+\setlength\bibitemsep{1.5\itemsep}
+
+% kandrews: replace round brackets with square brackets in citations
+\DeclareOuterCiteDelims{parencite}{\bibopenbracket}{\bibclosebracket}
+\DeclareInnerCiteDelims{textcite}{\bibopenbracket}{\bibclosebracket}
+
+% kandrews: replace round brackets with square brackets in bibliography
+% biblabeldate is a biblatex-ext feature
+\DeclareFieldFormat{biblabeldate}{\mkbibbrackets{#1}}
+
+
+% remove URL: from in front of URLs
+\DeclareFieldFormat{url}{\url{#1}}
+\DeclareFieldFormat{doi}{\doi{#1}}
+\DeclareFieldFormat{isbn}{\isbn{#1}}
+\DeclareFieldFormat{issn}{\issn{#1}}
+
+% suppress urldate field
+\AtEveryBibitem{\clearfield{urlyear}}
+
+% remove In: from @article and @inproceedings entries
+% https://tex.stackexchange.com/questions/10682/suppress-in-biblatex
+\renewbibmacro{in:}{%
+  \ifboolexpr{%
+     test {\ifentrytype{article}}%
+     or
+     test {\ifentrytype{inproceedings}}%
+  }{}{\printtext{\bibstring{in}\intitlepunct}}%
+}
+
+% make all entry titles italic
+% (also removes quotation marks from around titles)
+% https://tex.stackexchange.com/questions/311816/want-title-in-simple-numeric-not-italic-through-bibliography
+\DeclareFieldFormat*{title}{\mkbibitalic{#1}}
+\DeclareFieldFormat*{citetitle}{\mkbibitalic{#1}}
+
+% make journal names non-italic
+\DeclareFieldFormat{journaltitle}{#1\isdot}
+
+% make proceedings names non-italic
+\DeclareFieldFormat[inproceedings]{booktitle}{#1\isdot}
+
+% use nth for edition
+\DeclareFieldFormat{edition}{%
+  \ifinteger{#1}
+    {\nth{#1}~\bibstring{edition}}
+    {#1\isdot}}
+
+% overwrite some standard strings in english.lbx
+\DefineBibliographyStrings{english}{%
+  edition          = {Edition},
+  mathesis         = {Master's Thesis},
+  phdthesis        = {PhD\addabbrvspace Thesis},
+}
+
+
+% kandrews
+% use Unix format for dates in biblio:
+% 29 Dec 2015, 01 Oct 2018, etc.
+
+% for now, define under lang english not british
+% due to bug in biblatex 3.11
+
+\DefineBibliographyStrings{english}{%
+  january          = {Jan},
+  february         = {Feb},
+  march            = {Mar},
+  april            = {Apr},
+  may              = {May},
+  june             = {Jun},
+  july             = {Jul},
+  august           = {Aug},
+  september        = {Sep},
+  october          = {Oct},
+  november         = {Nov},
+  december         = {Dec},
+}
+
+\DefineBibliographyExtras{english}{%
+% #1 = year, #2 = month, #3 = day
+\protected\def\mkbibdatelong#1#2#3{%
+  \iffieldundef{#3}
+    {}
+    {\mkdayzeros{\thefield{#3}}%
+     \iffieldundef{#2}{}{\nobreakspace}}%
+  \iffieldundef{#2}
+    {}
+    {\mkbibmonth{\thefield{#2}}%
+     \iffieldundef{#1}{}{\space}}%
+  \iffieldbibstring{#1}{\bibstring{\thefield{#1}}}{\mkyearzeros{\thefield{#1}}}}%
+%
+\protected\def\mkbibdateshort#1#2#3{%
+  \iffieldundef{#3}
+    {}
+    {\mkdayzeros{\thefield{#3}}%
+     \iffieldundef{#2}{}{\nobreakspace}}%
+  \iffieldundef{#2}
+    {}
+    {\mkbibmonth{\thefield{#2}}%
+     \iffieldundef{#1}{}{\space}}%
+  \iffieldbibstring{#1}{\bibstring{\thefield{#1}}}{\mkyearzeros{\thefield{#1}}}}%
+}
+
+
+
+\addbibresource{ref.bib}
+
+
+
+% xurl provides better URL breaking than url
+% load after biblatex
+\usepackage[hyphens,obeyspaces]{xurl}
+\def\UrlFont{\smaller\ttfamily}
+
+
+
+
+
+
+\usepackage{ifpdf}
+
+\ifpdf
+  % pdflatex
+  \usepackage[pdftex]{graphicx}
+  \DeclareGraphicsExtensions{.pdf,.jpg,.png}
+  \pdfcompresslevel=9
+  \pdfobjcompresslevel=1  % also compress PDF object streams except embedded PDFs
+  \pdfpageheight=297mm
+  \pdfpagewidth=210mm
+  \usepackage[         % hyperref should be last package loaded
+    unicode,
+    pdftex,
+    pdfversion=1.7,
+    pdftitle={\thistitle},
+    pdfsubject={\thissubject},
+    pdfauthor={\thisauthor},
+    pdfkeywords={\thiskeywords},
+    bookmarks,
+    bookmarksnumbered,
+    linktocpage,
+    colorlinks,
+    linkcolor=darkred,
+    anchorcolor=red,
+    citecolor=darkgreen,
+    urlcolor=darkblue,
+    pdfstartview=Fit,              % initial view
+    pdfview=Fit,                   % view after following a link
+    pdfpagelayout=SinglePage,      % single page, no scrolling
+    pdfpagemode=UseOutlines,       % open bookmarks in Acrobat
+    plainpages=false,              % avoids duplicate page number problem
+    pdfpagelabels,                 % avoids duplicate page number problem
+    breaklinks=true,               % allow links exceeding a single line
+  ]{hyperref}
+
+\else
+  % latex
+  \usepackage[dvips]{graphicx}
+  \DeclareGraphicsExtensions{.eps}
+  \usepackage[dvips]{hyperref}
+\fi
+
+
+% export adjustbox keys to includegraphics
+% must be after \usepackage{graphicx}
+\usepackage[export]{adjustbox}    % valign=t, frame, ...
+
+
+
+
+
+% subset of macros from thesis-macros
+
+% \liintro list item intro is a style used when list items have an
+% introduction phrase (say in italics) followed by a colon.
+\newcommand{\liintro}[1]{\emph{#1}}
+
+% short notes in square brackets
+\newcommand{\shortnote}[1]
+{%
+{{\smaller{}[#1]}}
+}
+
+
+\newcommand{\TODO}[1]
+{
+{\textcolor{red}{[TODO: #1]}}
+}
+
+
+
+\newcommand{\imgcredit}[1]
+{\smaller{}[#1]}
+
+
+
+\newcommand{\copyrightACM}
+{%
+Copyright \copyright\ by the Association for Computing Machinery, Inc.%
+}
+
+
+
+
+\newcommand{\daymonthyear}[3]
+{%
+\twodigit{#1}\hspace{0.7ex}\nolinebreak[2]\shortmonthname[#2]\hspace{0.7ex}\nolinebreak[2]#3%
+}
+
+
+\newcommand{\monthyear}[2]
+{%
+\shortmonthname[#1]\hspace{0.7ex}\nolinebreak[2]#2%
+}
+
+
+\newcommand{\yearmonthday}[3]
+{%
+\twodigit{#3}\hspace{0.7ex}\nolinebreak[2]\shortmonthname[#2]\hspace{0.7ex}\nolinebreak[2]#1%
+}
+
+
+\newcommand{\yearmonth}[2]
+{%
+\shortmonthname[#2]\hspace{0.7ex}\nolinebreak[2]#1%
+}
+
+
+
+% link to Amazon or
+% http://worldcatlibraries.org/wcpa/isbn/[ISBN number]
+% http://amazon.com/exec/obidos/ASIN/#1/keithandrewshcic
+% http://amazon.com/dp/#1/
+
+\newrobustcmd{\isbn}[1]
+{%
+{%
+\ifpdf
+{\smaller ISBN
+\href{http://amazon.co.uk/dp/#1/}{#1}}%
+\else
+{\smaller ISBN #1}%
+\fi
+}%
+}
+
+
+
+% ISSN
+% http://www.bl.uk/services/bibliographic/issn.html
+% 8 digits, should be printed xxxx-xxxx
+% e.g. 0020-0190 is Information Processing Letters, Elsevier
+%
+% Lookup services:
+% http://kmittlib.lib.kmutt.ac.th:81/search/i?SEARCH=0020-0190
+% http://worldcatlibraries.org/wcpa/issn/0020-0190
+
+\newrobustcmd{\issn}[1]
+{%
+{%
+\ifpdf
+{\smaller ISSN
+\href{http://worldcatlibraries.org/wcpa/issn/#1}{#1}}%
+\else
+{\smaller ISSN #1}%
+\fi
+}%
+}
+
+
+
+% DOIs  http://doi.org/  e.g.
+% doi:10.1038/nature723
+% http://doi.org/10.1038/nature723
+
+\newrobustcmd{\doi}[1]
+{%
+{%
+\def\UrlFont{\smaller\rmfamily}
+\ifpdf                                   % pdflatex
+\href{http://doi.org/#1}{doi:\protect\nolinkurl{#1}}%
+\else                                    % latex
+doi:\protect\nolinkurl{#1}%
+\fi
+}%
+}
+
+
+
+
+
+\newrobustcmd{\website}[1]
+{%
+\ifpdf                                  % pdflatex
+\href{http://#1/}{\nolinkurl{#1}}%
+\else                                   % latex
+\nolinkurl{#1}%
+\fi
+}
+
+
+
+
+\newcommand{\news}[1]
+{%
+\ifpdf
+\href{news:#1}{\nolinkurl{#1}}
+\else
+\nolinkurl{#1}%
+\fi
+}
+
+
+
+
+
+
+
+
+% based on url package
+% define styles for class, file, and variable names
+% which break nicely at line breaks
+
+% make the macros robust so they work inside captions, etc
+
+\newcommand{\ttname}{\begingroup \smaller\urlstyle{tt}\Url}
+\newcommand{\rmname}{\begingroup \smaller\urlstyle{rm}\Url}
+\newcommand{\sfname}{\begingroup \smaller\urlstyle{sf}\Url}
+
+
+% fname is for file names and directory names
+\newrobustcmd{\fname}[1]{\ttname{#1}}
+
+% vname is for variable names, domain names, email addresses
+\newrobustcmd{\vname}[1]{\ttname{#1}}
+
+
+
+
+% for class names, define our own url style
+
+\makeatletter  % protect @ names
+
+% \url@letstyle: New URL style to premit break at any letters.
+% Based on \url@ttstyle
+
+\def\Url@letdo{% style assignments for tt fonts or T1 encoding
+\def\UrlBreaks{\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l%
+               \do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x%
+               \do\y\do\z%
+               \do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L%
+               \do\M\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X%
+               \do\Y\do\Z%
+}%
+\def\UrlBigBreaks{\do\.\do\@\do\\\do\/\do\!\do\_\do\|\do\%\do\;\do\>\do\]%
+ \do\)\do\,\do\?\do\'\do\+\do\=\do\#\do\:\do@url@hyp}%
+\def\UrlNoBreaks{\do\(\do\[\do\{\do\<}% (unnecessary)
+\def\UrlSpecials{\do\ {\ }}%
+\def\UrlOrds{\do\*\do\-\do\~}% any ordinary characters that aren't usually
+\Urlmuskip = 0mu plus 1mu%
+}
+
+\def\url@letstyle{%
+\@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\sffamily}}\Url@letdo
+}
+
+\makeatother  % unprotect @ names
+
+% class names
+\newcommand\letname{\begingroup \smaller\urlstyle{let}\Url}
+
+\newrobustcmd{\cname}[1]{\letname{#1}}
+
+
+% ui element names
+\newrobustcmd{\uiname}[1]{{\smaller\textsf{#1}}}
+
+% html5 element names
+\newrobustcmd{\elname}[1]{{\lstinline{<#1>}}}
+
+% css class names
+\newrobustcmd{\cssname}[1]{{\lstinline{#1}}}
+
+
+
+% Euro symbol
+\newcommand{\euro}{\texteuro\,}
+
+% times symbol
+\newcommand{\timessym}{\texttimes\,}
+
+% approx symbol
+\newcommand{\approxsym}{\ensuremath\approx\,}
+
+% plusminus symbol
+\newcommand{\plusminussym}{\textpm\,}
+
+% not equal symbol
+\newcommand{\neqsym}{\ensuremath{\neq\,}}
+
+% rightarrow symbol
+\newcommand{\rightarrowsym}{\ensuremath\rightarrow\,\,}
+
+
+% thumbs up and thumbs down symbols
+
+\newcommand{\uthumb}{\smaller[2]\raisebox{1pt}{\textcolor{DarkGreen}{\faThumbsUp}}}
+
+\newcommand{\dthumb}{\smaller[2]\raisebox{1pt}{\textcolor{DarkRed}{\faThumbsDown}}}
+
+% TODO REMOVE AFTER FILLING WITH PROPER STUFF %
+\usepackage{lipsum}
+
+
+
+
+
+\begin{document}
+
+\unixdate
+
+\normalsize
+\pagestyle{empty}         % for preliminary pages (no numbers shown)
+\pagenumbering{Roman}     % for pdf labels
+
+
+
+
+\begin{titlepage}
+
+\begin{center}
+
+\begin{spacing}{1.1}
+\Large\sffamily\bfseries
+\thistitle
+\end{spacing}
+
+\ifstrempty{\thissubject}{}%     % if empty subject string, do nothing
+{%
+\begin{spacing}{1.1}
+\large\sffamily\bfseries
+\thissubject
+\end{spacing}
+}
+
+
+\vspace{1cm}
+
+{\large\sffamily \thisauthor}
+
+% {\large\sffamily Group 4}
+% \vspace{5mm}
+% {\large\sffamily Keith Andrews, Tom Strong, Bill Weak, and Seb Green}
+
+\vspace{1cm}
+
+% Institute of Interactive Systems and Data Science (ISDS), \\
+% Graz University of Technology \\
+% A-8010 Graz, Austria \\[1cm]
+
+
+{\large
+706.041 Information Architecture and Web Usability WS 2022\\
+Graz University of Technology
+}
+
+
+\vspace{1cm}
+
+\thisdate
+
+\end{center}
+
+
+
+\vspace{2cm}
+
+\begin{quote}
+%\begin{center}
+{\large\sffamily\bfseries Abstract}
+TODO! This is where we'll put our abstract.
+%\end{center}
+
+\end{quote}
+
+\vfill
+
+\begin{center}
+{\footnotesize\sffamily \copyright~Copyright \thisyear{} by the author(s),
+except as otherwise noted.}
+
+\vspace{2mm}
+{\footnotesize\sffamily This work is placed under a
+Creative Commons Attribution 4.0 International
+(\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}) licence.}
+\end{center}
+
+\end{titlepage}
+
+
+
+
+\cleardoublepage
+\pagestyle{plain}             % for preliminary pages
+\pagenumbering{roman}         % for preliminary pages
+
+
+\begin{spacing}{0.8}
+\tableofcontents
+\end{spacing}
+\addcontentsline{toc}{chapter}{Contents}
+
+\cleardoublepage
+\begin{spacing}{0.8}
+\listoffigures
+\end{spacing}
+\addcontentsline{toc}{chapter}{List of Figures}
+
+
+
+\cleardoublepage
+\pagestyle{main}              % for main pages
+\pagenumbering{arabic}        % for main pages
+
+
+\cleardoublepage
+\input{sections/intro}
+
+\cleardoublepage
+\input{sections/fundamentals}
+
+\cleardoublepage
+\input{sections/examples}
+
+\cleardoublepage
+\input{sections/libraries}
+
+\cleardoublepage
+\input{sections/cross-platform}
+
+\cleardoublepage
+\input{sections/performance}
+
+\cleardoublepage
+% for now, switch to language english
+% hack to force unix date for biblio, biblatex 3.11
+\begin{otherlanguage}{english}
+\printbibliography[heading=bibintoc]
+\end{otherlanguage}
+
+
+\end{document}
+
