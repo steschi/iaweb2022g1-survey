@@ -1,0 +1,128 @@
+%----------------------------------------------------------------
+%
+%  File    :  practical-example.tex
+%
+%  Authors :  Pinheiro de Souza, Schintler, Steinkellner
+% 
+%  Created :  22 Nov 2022
+% 
+%----------------------------------------------------------------
+
+\newcommand*{\codesnippet}[3]{
+  \inputminted[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    linenos,
+    fontsize=\scriptsize,
+    firstline=#1,
+    lastline=#2
+  ]{typescript}{#3}}
+
+
+\newcommand*{\code}[1]{
+  \inputminted[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    linenos,
+    fontsize=\scriptsize,
+    breaklines=true,
+    highlightlines={30-33,42-49}
+  ]{typescript}{#1}}
+
+
+\chapter{Practical Example of using WebGPU}
+
+\label{chap:PracticalExample}
+
+Due to the nature of rendering directly with a GPU using WebGPU is a rather tedious process.
+This section covers the essential stages needed for a minimal working example.
+
+\section{General Flow}
+
+The inherent complexity of programming fast Web Graphics via WebGPU stems from the way one has to interact with a GPU itself.
+In contrast to simpler 2D graphics like SVG and Canvas2D WebGPU is just an abstraction layer on top of broadly used GPU APIs like Vulkan (cite?).
+It, therefore, has to perform similar steps as native software rendering 3D scenes. As can be seen in \ref*{fig:webgpu-explain} we first need to
+collect all information of a scene, like Vertex positions and color, as well as the matching WGSL Shader Code and mangle it via the CPU into a properly structured
+buffer on the GPU's V-RAM. Only then can the CPU hand over control and allow the GPU to start execution of the WGSL Shader Code which will use the buffer to render a proper scene.
+This workflow is described in more detail in the following sections.
+
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+  {images/wgpu-explain.pdf}
+
+  \caption[Dataflow in WebGPU, example]
+  {
+    An exemplary illustration of how instructions and data of a 3d scene have to be handled
+    to use WebGPU.
+    \imgcredit{Created by the authors.}
+  }
+  \label{fig:webgpu-explain}
+\end{figure}
+
+
+\section{Steps}
+
+
+
+
+\subsection{Step 1 - Creating a Buffer}
+
+As can be seen in \ref*{code:create-buffer} ... TODO
+
+
+\begin{figure}[tp]
+  \centering
+  \codesnippet{4}{22}{../webgpu-simple/src/helpers.ts}
+
+  \caption[Code Snippet: createBuffer]
+  {
+    An exemplary illustration of how instructions and data of a 3d scene have to be handled
+    to use WebGPU.
+    \imgcredit{Created by the authors.}
+  }
+  \label{code:create-buffer}
+\end{figure}
+
+
+\subsection{Step 2 - Encoding the Vertex Information}
+As can be seen in \ref*{code:vertex-encode} ... TODO
+
+
+\begin{figure}[tp]
+
+  \centering
+  \code{../shared/src/vertex.ts}
+
+  \caption[Code Snippet: Vertex Encoding]
+  {
+    An exemplary illustration of how to encode vertex information for use in WebGPU
+    \imgcredit{Created by the authors.}
+  }
+  \label{code:vertex-encode}
+\end{figure}
+
+\subsection{Step 3 - Setting up the Pipeline}
+
+As can be seen in \ref*{code:pipeline-setup} ... TODO
+
+
+\begin{figure}[tp]
+
+  \centering
+  \codesnippet{31}{49}{../webgpu-simple/src/main.ts}
+
+  \caption[Code Snippet: WebGPU Pipeline]
+  {
+    An exemplary illustration of how to setup a WebGPU pipeline
+    \imgcredit{Created by the authors.}
+  }
+  \label{code:pipeline-setup}
+\end{figure}
+
+\subsection{Step 4 - Adding the WGSL Shader Code}
+
+
