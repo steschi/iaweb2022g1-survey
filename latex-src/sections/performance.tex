@@ -2,7 +2,7 @@
 %
 %  File    :  performance.tex
 %
-%  Authors :  Thomas Pinheiro de Souza, Schintler, Steinkellner
+%  Authors :  Pinheiro de Souza, Schintler, Steinkellner
 % 
 %  Created :  22 Nov 2022
 % 
@@ -12,7 +12,7 @@
 
 If WebGPU wants to become the need standard and supersede WebGL it has to provide the performance.
 
-\subsection{Babylon.js}
+\section{Babylon.js}
 
 Since Babylon has already support for both renderers it also provides a benchmark for both.
 By rendering the same scene once with WebGL \cite{babylon_example_webgl} and once with WebGPU \cite{babylon_example_webgpu}.
@@ -20,7 +20,7 @@ Providing also a side by side comparison via a video.
 There it is visible that WebGPU gives a performance boost in comparison with WebGL.
 Showcased by the lower CPU load as well as the higher frames per seconds.
 
-\subsection{Water simulation}
+\section{Water simulation}
 
 Another graphics comparison was published by Eytan Manor on the medium webpage \cite{water_sim_perf}.
 Comparing OpgenGL and Vulkan the underlying APIs of WebGL and WebGPU. 
@@ -67,7 +67,7 @@ This results show it quite well that Vulkan and thus WebGPU gives us a great per
 Since Vulkan is considerable a lower-level API than OpenGL and also providing developers to better distribute work through multiple CPU cores.
 It provides higher performance, visible in the FPS, and more balanced CPU to GPU usage.
 
-\subsection{Matrix multiplication}
+\section{Matrix multiplication}
 
 On benchmark that also should not be omitted is a comparison of computations task.
 Since WebGPU is equipped with a compute pipeline and not only with render pipeline.\\
