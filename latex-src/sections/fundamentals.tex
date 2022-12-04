@@ -1,4 +1,4 @@
-%----------------------------------------------------------------
+----------------------------------------------------------------
 %
 %  File    :  fundamentals.tex
 %
@@ -56,6 +56,61 @@ First, the vertices are assembled into primitives.
 These primitives are subsequently clipped to fit within the bounding box of the viewport, before entering the rasterization stage.
 This rasterization stage transforms the primitive into rasterized points on the screen.
 
+\subsection{Rasterization}
+The rasterization stage is not directly programmable like the vertex or fragment shaders,
+but it is a vital part of the rendering pipeline. During this stage, the vertex information
+is transformed into rasterized segments on the screen, corresponding to the available pixels in the
+viewport. Additionally, this stage includes the culling of obstructed polygons. Any front-facing
+polygons are rendered and evaluated, whilst all obstructed ones are discarded.
+
+The most performant way of rasterization is evaluating each available pixel at its center.
+If that center point is inside a primitive, the corresponding pixel should be coloured.
+Whilst being performant and fairly simple to execute, this leads to a stair-like effect on edges that
+should be smooth, often called "jaggies".
+Figure \ref{fig:rasterization} shows the naive implementation of the rasterization process.
+The rasterized points are shaded blue, all discarded pixels are white.
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+{images/rasterization.pdf}
+
+\caption[Rasterization, example illustration]
+{
+  Exemplary illustration of the rasterization step for a primitive triangle.
+  Rasterized points inside the primitive are coloured in blue, whilst points outside are displayed white.
+\imgcredit{Created by the authors.}
+}
+\label{fig:rasterization}
+\end{figure}
+
+For most applications, it is desirable to reduce the stair-like jaggies that the rasterization process produces.
+This is often done through a process called Anti-Aliasing.
+WebGPU provides a built-in way to deal with aliasing by enabling a technique called multisampling for the
+rasterization process. This is done through optional configuration during the setup of the scene.
+
+With multisampling enabled, each pixel is evaluated on multiple points, instead of just the centre.
+The sample points are deliberately placed near the edge, and are grouped in a sample mask.
+The final pixel value is the result of interpolating between all four point samples of the sample mask.
+
+Figure \ref{fig:multisampling} illustrates the process of multisampling on an example triangle.
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+{images/multisampling.pdf}
+
+\caption[Multisampling, example illustration]
+{
+  Exemplary illustration of multisampling during the rasterization step for a primitive triangle.
+  Sample points are indicated with red circles for two of the pixels. All pixels are evaluated with the same
+  sample mask, and the final pixel colour value is the result of interpolating between all sample points.
+\imgcredit{Created by the authors.}
+}
+\label{fig:multisampling}
+\end{figure}
+
+
 \subsection{Fragment Shader}
 The vertex shader provides vertices that define the shape of a primitive.
 Within the fragment shader, this primitive is coloured.
@@ -77,4 +132,3 @@ Figure \ref{fig:fragment-01} shows the desired output of this stage, whilst also
 }
 \label{fig:fragment-01}
 \end{figure}
-

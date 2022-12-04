@@ -1,0 +1,38 @@
+%----------------------------------------------------------------
+%
+%  File    :  rust.tex
+%
+%  Authors :  Pinheiro de Souza, Schintler, Steinkellner
+% 
+%  Created :  22 Nov 2022
+% 
+%----------------------------------------------------------------
+
+\chapter{Rust}
+
+\label{chap:Rust}
+
+Since the WebGPU Shading Language (WGSL) is largely a syntactic mix between Rust and C,
+working with WebGPU in Rust seems to be a natural fit.
+Over the course of this project, we have explored the combination of Rust and WebGPU by implementing a simple example.
+
+Rust provides a very easy way to compile code into WebAssembly through a package called \lstinline{wasm-bindgen}.
+The package \lstinline{wasm-bindgen-futures} is needed to wait for asynchronous operations within the browser.
+WebGPU is provided to rust via the \lstinline{wgpu} package.
+Listing %TODO:INSERT LISTING
+shows the \lstinline{Cargo.toml} file used in our minimal example.
+
+Once packages are properly setup and a module bundler like Vite or Webpack is configured to handle WASM files properly,
+implementation of the WebGPU code is fairly straightforward.
+
+Similar to the Typescript implementation, the first step is always window and device acquisition, required in order
+to setup a canvas and a GPU handle to draw to. In Rust, this is done through requesting a div element from the browser.
+Afterwards, a new canvas element for WebGPU is pushed to the DOM..
+
+The following stages start with initializing the WebGPU backend, followed by surface and adapter creation and acquisition
+of the GPU handle.
+Shader generation is done by including a \lstinline{*.wgsl} file according to the WebGPU specification.
+After setting up the surface configuration with the appropriate viewport size and texture format, the pipeline can be created.
+
+Finally, the simple example is completed by setting up a render function that is called for every frame.
+The example code can be examined on the public GitHub repository for this project. %TODO LINK
