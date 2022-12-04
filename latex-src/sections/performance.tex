@@ -10,6 +10,97 @@
 
 \chapter{Performance}
 
+If WebGPU wants to become the need standard and supersede WebGL it has to provide the performance.
+
+\subsection{Babylon.js}
+
+Since Babylon has already support for both renderers it also provides a benchmark for both.
+By rendering the same scene once with WebGL \cite{babylon_example_webgl} and once with WebGPU \cite{babylon_example_webgpu}.
+Providing also a side by side comparison via a video.
+There it is visible that WebGPU gives a performance boost in comparison with WebGL.
+Showcased by the lower CPU load as well as the higher frames per seconds.
+
+\subsection{Water simulation}
+
+Another graphics comparison was published by Eytan Manor on the medium webpage \cite{water_sim_perf}.
+Comparing OpgenGL and Vulkan the underlying APIs of WebGL and WebGPU. 
+In this benchmark, a water mesh gets renderderd and transformed to simulate realistic movements.
+The results of this benchmark a visible in \ref{fig:water_sim_gpu}.
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+  {images/water_sim_fps.png}
+  
+  \caption[Water simulation results average frames per second (FPS)]
+  {
+  \imgcredit{https://eytanmanor.medium.com/the-story-of-webgpu-the-successor-to-webgl-bf5f74bc036a}
+  }
+  \label{fig:water_sim_fps}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+  {images/water_sim_cpu.png}
+  
+  \caption[Water simulation results average frames per second (FPS)]
+  {
+  \imgcredit{https://eytanmanor.medium.com/the-story-of-webgpu-the-successor-to-webgl-bf5f74bc036a}
+  }
+  \label{fig:water_sim_cpu}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+  {images/water_sim_gpu.png}
+  
+  \caption[Water simulation results average frames per second (FPS)]
+  {
+  \imgcredit{https://eytanmanor.medium.com/the-story-of-webgpu-the-successor-to-webgl-bf5f74bc036a}
+  }
+  \label{fig:water_sim_gpu}
+\end{figure}
+
+This results show it quite well that Vulkan and thus WebGPU gives us a great performance boost at much less CPU cost.
+Since Vulkan is considerable a lower-level API than OpenGL and also providing developers to better distribute work through multiple CPU cores.
+It provides higher performance, visible in the FPS, and more balanced CPU to GPU usage.
+
+\subsection{Matrix multiplication}
+
+On benchmark that also should not be omitted is a comparison of computations task.
+Since WebGPU is equipped with a compute pipeline and not only with render pipeline.\\
+In WebGL there is not something similiar to WebGPUs compute piepline.
+However it is possible to get mimic the compute pipline with the help of a little trick.
+The data where computations should be performed on needs to be converted into an image.
+This image is than passed to the pipeline and the fragment shader were the actual computations are performed.
+After the computations are down the results get stored in the same image as pixel color values.
+Those values now have to be read from the image back into our original dataformat from the image. \\
+Where WebGPU provides compute shaders for those tasks.
+The data is passed to the GPU with a buffer and the computations are down asynchronously. 
+Additionally there is no need to convert or extract the data from an image, giving another performance boost.
+
+Such a benchmark is visible in \ref{fig:matrix_mult}. 
+In this benchmark the size of the matrix gets continuously bigger.
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+  {images/matrix_mult.png}
+  
+  \caption[Water simulation results average frames per second (FPS)]
+  {
+  \imgcredit{https://eytanmanor.medium.com/the-story-of-webgpu-the-successor-to-webgl-bf5f74bc036a}
+  }
+  \label{fig:matrix_mult}
+\end{figure}
+
+In this example it is visible to see that the "Image hack" with WebGL is approximatly 3.5 times slower than the compute shaders of WebGPU.
+Additionally it can process more data and it does not block the main thread.
+Showcasing promising results for WebGPU and its compute shaders.
+
+
 \label{chap:Performance}
 
 \begin{displayquote}

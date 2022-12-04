@@ -12,6 +12,38 @@
 
 \label{chap:Libraries}
 
+Getting started with WebGL is quite simple. 
+One factor that makes it that simple are the many libraries that exist and provide an interface for WebGL.
+However the support of most for WebGPU is still lacking even though we should expect a release this quarter.
+
+\subsection{Two.js}
+
+Two.js is one of the most prominent libraries for working in 2D, hence the name.
+Providing a drawing api for drawing in multiple contexts, e.g. svg, canvas and WebGL.\\
+On the forum of Two.js the developers provide a little inside into the development.
+Talking about the next steps of the library and if WebGPU will be supported.
+Stating that \begin{displayquote} ... a WebGPU renderer seems like the natural evolution of renderers in Two.js. \end{displayquote}\cite{two_quote}.
+However also pointing to the fact that WebGPU is not released yet and thus not starting to work on it until there is an official release.
+
+\subsection{Three.js}
+
+Three.js is as the name suggests a 3D JavaScript library. 
+What Two.js is in the 2D domain for the 3D domain there is Three.js.\\
+In contrast to Two.js, Three.js is already actively working on implementing a WebGPU renderer.
+Currently there is already a WebGPU renderer implemented in Three.js that is usable. 
+Even though are still some issues and not all of the features work as intended, it is still usable to a certain degree.
+Which is also visible by the several different examples that are already online \cite{three_examples}.
+As well as in our own example the we created using Three.js and the WebGPU renderer.
+
+\subsection{Babylon.js}
+
+Last but not least there is Babylon.js.
+Babylon.js started the integration process for WebGPU already back in 2019 \cite{babylon_start_webgpu}. 
+The first usable WebGPU renderer in Babylon.js was released with version 5.0 of the library \cite{babylon_released}.
+Another milestone that Babylon.js was able to achieve was to got feature parity with the WebGL renderer back in January 2022 \cite{babylon_parity}.
+Thus providing full WebGPU support for the library.
+
+
 \begin{displayquote}
   This is a very elaborate quote by me.
 \end{displayquote}
