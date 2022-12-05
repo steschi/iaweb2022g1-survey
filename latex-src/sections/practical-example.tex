@@ -37,7 +37,7 @@
 \label{chap:PracticalExample}
 
 Due to the nature of rendering directly with a GPU using WebGPU is a rather tedious process as the essential code to render a scene needs to be executed on the GPU.
-This section covers the general program flow and the essential steps needed for a minimal working example. Due to WebGPUs complexity, not all details of the implementation are explained in detail. 
+This section covers the general program flow and the essential steps needed for a minimal working example. Due to WebGPU's complexity, not all details of the implementation are explained in detail. 
 
 
 \section{General Flow}
@@ -81,7 +81,7 @@ purpose \emph{Vertex} class is created to hold all the necessary information req
 into its numeric values. The additional function \emph{encodeVertices()} is designed to then combine multiple vertices into a single stream of numeric values. 
 
 
-\begin{figure}[tp]
+\begin{listing}
 
   \centering
   \code{../shared/src/vertex.ts}
@@ -92,7 +92,7 @@ into its numeric values. The additional function \emph{encodeVertices()} is desi
     \imgcredit{Created by the authors.}
   }
   \label{code:vertex-encode}
-\end{figure}
+\end{listing}
 
 \subsection{Step 2 - Creating a Buffer}
 
@@ -101,7 +101,7 @@ WebGPU exposes a \emph{createBuffer()} function on each \emph{GPUDevice} which a
 have a designated usage, resembling in which stage the buffer is used (vertex stage or fragment stage). After writing the data to the buffer it is important to also \emph{unmap()} the buffer 
 to hand over control to the GPU. 
 
-\begin{figure}[tp]
+\begin{listing}
   \centering
   \codesnippet{4}{22}{typescript}{../webgpu-simple/src/helpers.ts}
 
@@ -112,15 +112,18 @@ to hand over control to the GPU.
     \imgcredit{Created by the authors.}
   }
   \label{code:create-buffer}
-\end{figure}
+\end{listing}
 
 
 \subsection{Step 3 - WGSL Shader Code}
+\label{section:shader-code}
 
-As can be seen in \ref*{code:shader-code} ... TODO
+Even after the data is encoded and written on the GPU RAM one still needs to instruct the GPU how the data is actually to be processed. This is accomplished by writing custom
+shader code which is executed on the GPU in parallel. A minimal example can be seen in \ref*{code:shader-code}.  It contains 2 main functions for the vertex and fragment stages respectively. 
+The function \emph{vertex\_main} is executed once per vertex and is responsible for setting an appropriate position and color per vertex. Afterwards, the function \emph{fragment\_main} is 
+executed in parallel for each rasterized pixel of the scene to define the actual color value of each pixel. 
 
-
-\begin{figure}[tp]
+\begin{listing}
 
   \centering
   \usemintedstyle{xcode}
@@ -133,23 +136,25 @@ As can be seen in \ref*{code:shader-code} ... TODO
     \imgcredit{Created by the authors.}
   }
   \label{code:shader-code}
-\end{figure}
+\end{listing}
 
 \subsection{Step 4 - Setting up the final Pipeline}
 
-As can be seen in \ref*{code:pipeline-setup} ... TODO
+With all the previously mentioned parts in place, one can now set up the actual pipeline. As can be seen in \ref*{code:pipeline-setup} one first needs to access a \emph{HTMLCanvasElement}. This 
+then exposes a \emph{WebGPUConvasContext}. This context then allows the request of an adapter which in turn provides access to a \emph{GPUDevice}.
+This device can then be used to create a buffer with the encoded vertices data. Afterward, a render pipeline is created by supplying the necessary information for both the vertex and the fragment stage.
+Within this step, the shader code of \ref*{section:shader-code} is passed along as well. At last, a \emph{CommandEncoder} is used to encode a GPU command to render an actual image from the pipeline to the respective canvas on the screen. 
 
-
-\begin{figure}[tp]
+\begin{listing}
 
   \centering
   \codesnippet{11}{70}{typescript}{../webgpu-simple/src/main.ts}
 
   \caption[Code Snippet: WebGPU Pipeline]
   {
-    An exemplary illustration of how to setup a WebGPU pipeline
+    An exemplary illustration of how to set up a WebGPU pipeline
     \imgcredit{Created by the authors.}
   }
   \label{code:pipeline-setup}
-\end{figure}
+\end{listing}
 
