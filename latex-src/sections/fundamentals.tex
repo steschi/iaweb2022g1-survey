@@ -25,7 +25,9 @@ While providing numerous benefits to parallel computations over CPU-executed cod
 This document mainly focuses on the \textbf{render pipeline}, which houses both the \textbf{vertex shader} and the \textbf{fragment shader}.
 
 \section{Shaders}
-Shaders are programmable stages within GPU pipelines.
+Shaders are programmable stages within GPU pipelines, written in a special shader language in order to adhere
+to the requirements of the GPU.
+The shading language for WebGPU is called WSGL, and will be introduced in chapter \ref{chap:PracticalExample}.
 There are two programmable stages within the render pipeline:
 The vertex shader and the fragment shader.
 
@@ -116,7 +118,7 @@ The vertex shader provides vertices that define the shape of a primitive.
 Within the fragment shader, this primitive is coloured.
 The vertices enter this stage with a defined colour value, and the fragment shader interpolates between these values.
 It produces one fragment per rasterization point, and its execution is parallel.
-Figure \ref{fig:fragment-01} shows the desired output of this stage, whilst also highlighting the biggest challenge: Rasterization.
+Figure \ref{fig:fragment-01} shows the desired output of this stage.
 
 \begin{figure}[tp]
 \centering
