@@ -55,7 +55,7 @@ The complete code of all examples mentioned in this report can be examined on Gi
 WebGPU is provided to rust via the \lstinline{wgpu} package.
 Listing \ref{code:cargo} shows the \lstinline{Cargo.toml} file used in our minimal example.
 
-\begin{figure}[tp]
+\begin{listing}
   \centering
   \rust{../rust-example/wasm/Cargo.toml}
 
@@ -65,7 +65,7 @@ Listing \ref{code:cargo} shows the \lstinline{Cargo.toml} file used in our minim
     \imgcredit{Created by the authors.}
   }
   \label{code:cargo}
-\end{figure}
+\end{listing}
 
 
 Once packages are properly setup and a module bundler like Vite or Webpack is configured to handle WASM files properly,
@@ -78,9 +78,9 @@ implementation of the WebGPU code is fairly straightforward.
 \subsection{Step 2 --- Creating the Canvas}
 Similar to the previous TypeScript example, the first step is always window and device acquisition, required in order
 to set up a canvas and a GPU handle to draw to. In Rust, this is done through requesting an HTML div element from the browser.
-Afterwards, a new canvas element for WebGPU is pushed to the DOM, as demonstrated in \ref{code:rust-canvas}.
+Afterwards, a new canvas element for WebGPU is pushed to the DOM, as demonstrated in listing \ref{code:rust-canvas}.
 
-\begin{figure}[tp]
+\begin{listing}
   \centering
   \rustsnippet{165}{178}{../rust-example/wasm/src/lib.rs}
 
@@ -90,7 +90,7 @@ Afterwards, a new canvas element for WebGPU is pushed to the DOM, as demonstrate
     \imgcredit{Created by the authors.}
   }
   \label{code:rust-canvas}
-\end{figure}
+\end{listing}
 
 
 % --------------------------------------------------------------------------- %
@@ -98,9 +98,9 @@ Afterwards, a new canvas element for WebGPU is pushed to the DOM, as demonstrate
 
 \subsection{Step 3 --- GPU Handle Acquisition}
 The following stages start with initializing the WebGPU backend, followed by surface and adapter creation and acquisition
-of the GPU handle, as demonstrated in \ref{code:rust-handle}.
+of the GPU handle, as demonstrated in listing \ref{code:rust-handle}.
 
-\begin{figure}[tp]
+\begin{listing}
   \centering
   \rustsnippet{23}{51}{../rust-example/wasm/src/lib.rs}
 
@@ -111,7 +111,7 @@ of the GPU handle, as demonstrated in \ref{code:rust-handle}.
     \imgcredit{Created by the authors.}
   }
   \label{code:rust-handle}
-\end{figure}
+\end{listing}
 
 
 % --------------------------------------------------------------------------- %
@@ -124,7 +124,7 @@ the pipeline can be created. The shader code can be examined in listing \ref{cod
 The required Rust code to include the shader is shown in listing \ref{code:rust-shader}.
 
 
-\begin{figure}[tp]
+\begin{listing}
   \centering
   \rust{../rust-example/wasm/src/shader.wgsl}
 
@@ -134,10 +134,10 @@ The required Rust code to include the shader is shown in listing \ref{code:rust-
     \imgcredit{Created by the authors.}
   }
   \label{code:rust-wgsl}
-\end{figure}
+\end{listing}
 
 
-\begin{figure}[tp]
+\begin{listing}
   \centering
   \rustsnippet{53}{65}{../rust-example/wasm/src/lib.rs}
 
@@ -147,7 +147,7 @@ The required Rust code to include the shader is shown in listing \ref{code:rust-
     \imgcredit{Created by the authors.}
   }
   \label{code:rust-shader}
-\end{figure}
+\end{listing}
 
 
 % --------------------------------------------------------------------------- %
@@ -157,7 +157,7 @@ The required Rust code to include the shader is shown in listing \ref{code:rust-
 Finally, the simple example is completed by setting up a render function that is called for every frame,
 as demonstrated in listing \ref{code:rust-render}.
 
-\begin{figure}[tp]
+\begin{listing}
   \centering
   \rustsnippet{181}{192}{../rust-example/wasm/src/lib.rs}
 
@@ -167,5 +167,5 @@ as demonstrated in listing \ref{code:rust-render}.
     \imgcredit{Created by the authors.}
   }
   \label{code:rust-render}
-\end{figure}
+\end{listing}
 
