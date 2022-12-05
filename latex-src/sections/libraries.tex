@@ -48,14 +48,75 @@ To showcase how it is done with Three.js a line is created.
 
 \codesnippet{81}{84}{typescript}{../threejs-example/src/main.ts}
 
+Adding some hover interactivity it is possible to get something that looks similiar to \ref{fig:three_image}.
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+  {images/three_example_img1.png}
+  
+  \caption[An interactive Three.js example using WebGPU as renderer]
+  {
+  \imgcredit{Created by the authors.}
+  }
+  \label{fig:three_img1}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+  {images/three_example_img2.png}
+  
+  \caption[An interactive Three.js example using WebGPU as renderer]
+  {
+  \imgcredit{Created by the authors.}
+  }
+  \label{fig:three_img}
+\end{figure}
+
 \section{Babylon.js}
 
 Last but not least there is Babylon.js.
 Babylon.js started the integration process for WebGPU already back in 2019 \parencite{babylon_start_webgpu}. 
 The first usable WebGPU renderer in Babylon.js was released with version 5.0 of the library \parencite{babylon_released}.
 Another milestone that Babylon.js was able to achieve was to got feature parity with the WebGL renderer back in January 2022 \parencite{babylon_parity}.
-Thus providing full WebGPU support for the library.
+Thus providing full WebGPU support for the library. \\
 
+\noindent Similiar to Three.js it is possible to create a example scene quite easily.
+First we have to create a scene and specify the engine we want to use.
+
+\codesnippet{118}{121}{typescript}{../babylon-js-example/src/main.ts}
+\codesnippet{21}{27}{typescript}{../babylon-js-example/src/main.ts}
+
+\noindent After this we can start adding creating and adding objects to the scene.
+
+\codesnippet{39}{45}{typescript}{../babylon-js-example/src/main.ts}
+
+\noindent Last but not least there the actual interactivity can be added.
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+  {images/babylon_example_img1.png}
+  
+  \caption[An interactive Babylon.js example using WebGPU as renderer]
+  {
+  \imgcredit{Created by the authors.}
+  }
+  \label{fig:babylon_example_img1}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+  {images/babylon_example_img2.png}
+  
+  \caption[An interactive Babylon.js example using WebGPU as renderer]
+  {
+  \imgcredit{Created by the authors.}
+  }
+  \label{fig:babylon_example_img2}
+\end{figure}
 
 \begin{displayquote}
   This is a very elaborate quote by me.
