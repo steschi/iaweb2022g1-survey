@@ -14,11 +14,11 @@
 
 Getting started with WebGL is quite simple. 
 One factor that makes it that simple are the many libraries that exist and provide an interface for WebGL.
-However the support of most for WebGPU is still lacking even though we should expect a release this quarter.
+However the support of most libraries for WebGPU is still lacking even though we should expect a release this quarter.
 
 \section{Two.js}
 
-Two.js is one of the most prominent libraries for working in 2D, hence the name.
+Two.js is one of the most prominent library for working in 2D, hence the name.
 Providing a drawing api for drawing in multiple contexts, e.g. svg, canvas and WebGL.\\
 On the forum of Two.js the developers provide a little inside into the development.
 Talking about the next steps of the library and if WebGPU will be supported.
@@ -28,19 +28,19 @@ However also pointing to the fact that WebGPU is not released yet and thus not s
 \section{Three.js}
 
 Three.js is as the name suggests a 3D JavaScript library. 
-What Two.js is in the 2D domain for the 3D domain there is Three.js.\\
+What Two.js is in the 2D domain in the 3D domain there is Three.js.\\
 In contrast to Two.js, Three.js is already actively working on implementing a WebGPU renderer.
 Currently there is already a WebGPU renderer implemented in Three.js that is usable. 
-Even though are still some issues and not all of the features work as intended, it is still usable to a certain degree.
+Even though there are still some issues and not all of the features work as intended, it is still usable to a certain degree.
 Which is also visible by the several different examples that are already online \parencite{three_examples}.
-As well as in our own example the we created using Three.js and the WebGPU renderer. \\
+As well as in our own example that we created using Three.js and the WebGPU renderer. \\
 
 \noindent Here it is visible how the scene setup with the camera can look like. \\
 
 \codesnippet{30}{39}{typescript}{../threejs-example/src/main.ts}
 
 \noindent Before adding objects to a scene we have to create them.
-To showcase how it is done with Three.js a line is created.
+To showcase how it works with Three.js we show a codesnippet of the creation of a line.
 
 \codesnippet{43}{49}{typescript}{../threejs-example/src/main.ts}
 
@@ -92,7 +92,7 @@ First we have to create a scene and specify the engine we want to use.
 
 \codesnippet{39}{45}{typescript}{../babylon-js-example/src/main.ts}
 
-\noindent Last but not least there the actual interactivity can be added.
+\noindent Last but not least actual interactivity can be added.
 
 \begin{figure}[tp]
   \centering
@@ -117,7 +117,3 @@ First we have to create a scene and specify the engine we want to use.
   }
   \label{fig:babylon_example_img2}
 \end{figure}
-
-\begin{displayquote}
-  This is a very elaborate quote by me.
-\end{displayquote}
