@@ -43,7 +43,7 @@ This section covers the general program flow and the essential steps needed for 
 \section{General Flow}
 
 The inherent complexity of programming fast Web Graphics via WebGPU stems from the way one has to interact with a GPU itself.
-In contrast to simpler 2D graphics like SVG and Canvas2D WebGPU is just an abstraction layer on top of broadly used GPU APIs like Vulkan (cite?).
+In contrast to simpler 2D graphics like SVG and Canvas2D WebGPU is just an abstraction layer on top of broadly used GPU APIs like Vulkan.
 It, therefore, has to perform similar steps as native software rendering 3D scenes. As can be seen in listing \ref*{fig:webgpu-explain} we first need to
 collect all information of a scene, like Vertex positions and color, as well as the matching WGSL Shader Code and mangle it via the CPU into a properly structured
 buffer on the GPU's V-RAM. Only then can the CPU hand over control and allow the GPU to start execution of the WGSL Shader Code which will use the buffer to render a proper scene.
