@@ -14,18 +14,15 @@ const canvasContext = canvas.getContext("webgpu")!;
 
 // configure GPU and render pipeline
 const adapter = await gpu.requestAdapter();
-
-if (!adapter) {
-  throw new Error("no WebGPU context found");
-}
+if (!adapter) throw new Error("no WebGPU adapter found");
 
 const device = await adapter.requestDevice();
 
-// 1. setup buffer with vertices data
+// setup buffer with vertices data
 const encodedData = encodeVertices(Triangle);
 const positionBuffer = createBuffer(device, encodedData, GPUBufferUsage.VERTEX);
 
-// 2. setup pipelines
+// setup pipeline
 const format = gpu.getPreferredCanvasFormat();
 const commandEncoder = device.createCommandEncoder();
 const pipeline = device.createRenderPipeline({
@@ -48,14 +45,13 @@ const pipeline = device.createRenderPipeline({
   primitive: { topology: "triangle-list" },
 });
 
-// 3. configure view to display results
+// configure view to display results
 canvasContext.configure({ device, format, alphaMode: "opaque" });
 const passEncoder = commandEncoder.beginRenderPass({
   colorAttachments: [
     {
       view: canvasContext.getCurrentTexture().createView(),
-      // background color
-      clearValue: { r: 0, g: 0.0, b: 0, a: 1 },
+      clearValue: { r: 0, g: 0.0, b: 0, a: 1 }, // background color
       loadOp: "clear",
       storeOp: "store",
     },
