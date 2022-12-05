@@ -15,14 +15,14 @@ If WebGPU wants to become the need standard and supersede WebGL it has to provid
 \section{Babylon.js}
 
 Since Babylon has already support for both renderers it also provides a benchmark for both.
-By rendering the same scene once with WebGL \cite{babylon_example_webgl} and once with WebGPU \cite{babylon_example_webgpu}.
+By rendering the same scene once with WebGL \parencite{babylon_example_webgl} and once with WebGPU \parencite{babylon_example_webgpu}.
 Providing also a side by side comparison via a video.
 There it is visible that WebGPU gives a performance boost in comparison with WebGL.
 Showcased by the lower CPU load as well as the higher frames per seconds.
 
 \section{Water simulation}
 
-Another graphics comparison was published by Eytan Manor on the medium webpage \cite{water_sim_perf}.
+Another graphics comparison was published by Eytan Manor on the medium webpage \parencite{water_sim_perf}.
 Comparing OpgenGL and Vulkan the underlying APIs of WebGL and WebGPU. 
 In this benchmark, a water mesh gets renderderd and transformed to simulate realistic movements.
 The results of this benchmark a visible in \ref{fig:water_sim_gpu}.
@@ -72,7 +72,7 @@ It provides higher performance, visible in the FPS, and more balanced CPU to GPU
 On benchmark that also should not be omitted is a comparison of computations task.
 Since WebGPU is equipped with a compute pipeline and not only with render pipeline.\\
 In WebGL there is not something similiar to WebGPUs compute piepline.
-However it is possible to get mimic the compute pipline with the help of a little trick.
+However it is possible to get mimic the compute pipeline with the help of a little trick.
 The data where computations should be performed on needs to be converted into an image.
 This image is than passed to the pipeline and the fragment shader were the actual computations are performed.
 After the computations are down the results get stored in the same image as pixel color values.

@@ -22,7 +22,7 @@ Two.js is one of the most prominent libraries for working in 2D, hence the name.
 Providing a drawing api for drawing in multiple contexts, e.g. svg, canvas and WebGL.\\
 On the forum of Two.js the developers provide a little inside into the development.
 Talking about the next steps of the library and if WebGPU will be supported.
-Stating that \begin{displayquote} ... a WebGPU renderer seems like the natural evolution of renderers in Two.js. \end{displayquote}\cite{two_quote}.
+Stating that \begin{displayquote} "... a WebGPU renderer seems like the natural evolution of renderers in Two.js." \end{displayquote}\parencite{two_quote}.
 However also pointing to the fact that WebGPU is not released yet and thus not starting to work on it until there is an official release.
 
 \section{Three.js}
@@ -32,15 +32,28 @@ What Two.js is in the 2D domain for the 3D domain there is Three.js.\\
 In contrast to Two.js, Three.js is already actively working on implementing a WebGPU renderer.
 Currently there is already a WebGPU renderer implemented in Three.js that is usable. 
 Even though are still some issues and not all of the features work as intended, it is still usable to a certain degree.
-Which is also visible by the several different examples that are already online \cite{three_examples}.
-As well as in our own example the we created using Three.js and the WebGPU renderer.
+Which is also visible by the several different examples that are already online \parencite{three_examples}.
+As well as in our own example the we created using Three.js and the WebGPU renderer. \\
+
+\noindent Here it is visible how the scene setup with the camera can look like. \\
+
+\codesnippet{30}{39}{../threejs-example/src/main.ts}
+
+\noindent Before adding objects to a scene we have to create them.
+To showcase how it is done with Three.js a line is created.
+
+\codesnippet{43}{49}{../threejs-example/src/main.ts}
+
+\noindent Last but not least the created objects have to be added into the scene to be visible.
+
+\codesnippet{81}{84}{../threejs-example/src/main.ts}
 
 \section{Babylon.js}
 
 Last but not least there is Babylon.js.
-Babylon.js started the integration process for WebGPU already back in 2019 \cite{babylon_start_webgpu}. 
-The first usable WebGPU renderer in Babylon.js was released with version 5.0 of the library \cite{babylon_released}.
-Another milestone that Babylon.js was able to achieve was to got feature parity with the WebGL renderer back in January 2022 \cite{babylon_parity}.
+Babylon.js started the integration process for WebGPU already back in 2019 \parencite{babylon_start_webgpu}. 
+The first usable WebGPU renderer in Babylon.js was released with version 5.0 of the library \parencite{babylon_released}.
+Another milestone that Babylon.js was able to achieve was to got feature parity with the WebGL renderer back in January 2022 \parencite{babylon_parity}.
 Thus providing full WebGPU support for the library.
 
 
