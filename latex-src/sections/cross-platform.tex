@@ -2,7 +2,7 @@
 %
 %  File    :  cross-platform.tex
 %
-%  Authors :  Thomas Pinheiro de Souza, Schintler, Steinkellner
+%  Authors :  Pinheiro de Souza, Schintler, Steinkellner
 % 
 %  Created :  22 Nov 2022
 % 
@@ -12,6 +12,26 @@
 
 \label{chap:Cross-Platform}
 
-\begin{displayquote}
-  This is a very elaborate quote by me.
-\end{displayquote}
+\section{WebAssembly}
+Instead of writing strictly platform-dependent native code, WebAssembly can be used to target
+execution within the context of the browser \parencite{wasm}. It offers a load-time-efficient virtual stack
+machine, executed within the sandbox of a browser tab. 
+It serves as a compile target for numerous languages, such as C, C++, or Rust \parencite{ivis-2022}.
+Compilation ends with a single executable file with the \lstinline{*.wasm} format,
+which can be loaded and executed within the browser.
+
+Most modern browsers already support the use of WebAssembly, with a 95\% coverage across
+global internet users, as shown in figure \ref{fig:wasm}.
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+{images/wasm.png}
+
+\caption[Browser Support of WebAssembly]{
+  WebAssembly is supported for about 95\% of global internet users.
+\imgcredit{Screenshot taken by the authors of this paper.}
+}
+\label{fig:wasm}
+\end{figure}
+
