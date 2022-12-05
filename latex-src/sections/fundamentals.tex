@@ -65,8 +65,8 @@ is transformed into rasterized segments on the screen, corresponding to the avai
 viewport. Additionally, this stage includes the culling of obstructed polygons. Any front-facing
 polygons are rendered and evaluated, whilst all obstructed ones are discarded.
 
-The most performant way of rasterization is evaluating each available pixel at its center.
-If that center point is inside a primitive, the corresponding pixel should be coloured.
+The most performant way of rasterization is evaluating each available pixel at its centre.
+If that centre point is inside a primitive, the corresponding pixel should be coloured.
 Whilst being performant and fairly simple to execute, this leads to a stair-like effect on edges that
 should be smooth, often called "jaggies".
 Figure \ref{fig:rasterization} shows the naive implementation of the rasterization process.

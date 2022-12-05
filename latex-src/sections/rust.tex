@@ -77,7 +77,7 @@ implementation of the WebGPU code is fairly straightforward.
 
 \subsection{Step 2 --- Creating the Canvas}
 Similar to the previous TypeScript example, the first step is always window and device acquisition, required in order
-to setup a canvas and a GPU handle to draw to. In Rust, this is done through requesting a div element from the browser.
+to set up a canvas and a GPU handle to draw to. In Rust, this is done through requesting an HTML div element from the browser.
 Afterwards, a new canvas element for WebGPU is pushed to the DOM, as demonstrated in \ref{code:rust-canvas}.
 
 \begin{figure}[tp]
