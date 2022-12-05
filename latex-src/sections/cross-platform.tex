@@ -17,7 +17,7 @@ Instead of writing strictly platform-dependent native code, WebAssembly can be u
 execution within the context of the browser \parencite{wasm}. It offers a load-time-efficient virtual stack
 machine, executed within the sandbox of a browser tab. 
 It serves as a compile target for numerous languages, such as C, C++, or Rust \parencite{ivis-2022}.
-Compilation ends with a single executable file with the \lstinline{*.wasm} format,
+The compilation ends with a single executable file with the \lstinline{*.wasm} format,
 which can be loaded and executed within the browser.
 
 Most modern browsers already support the use of WebAssembly, with a 95\% coverage across
@@ -29,9 +29,27 @@ global internet users, as shown in figure \ref{fig:wasm}.
 {images/wasm.png}
 
 \caption[Browser Support of WebAssembly]{
-  WebAssembly is supported for about 95\% of global internet users.
+  WebAssembly is supported by all major browsers used by about 95\% of global internet users.
 \imgcredit{Screenshot taken by the authors of this paper.}
 }
 \label{fig:wasm}
 \end{figure}
 
+\section{Engines}
+
+Using WebAssembly in conjunction with WebGPU allows the use of powerful and reliable Engines usually used for native development. 
+A few of the most recognized engines already have expressed interest in supporting WebGPU. 
+
+
+\subsubsection{Godot}
+Godot is a free and open-source game engine under the MIT license. \parencite{godot}. Based on communication on the project's issue board contributors plan to drop WebGL support in favor of WebGPU support \parencite{godot_webpu_support}.
+
+\subsubsection{PlayCanvas}
+PlayCanvas is a proprietary game engine specifically designed for the web \parencite{playcanvas}. It used to be focused on WebGL but is currently in the process of transitioning its codebase to support WebGPU.
+
+\subsubsection{Unity}
+Unity is a paid game engine and is especially used on mobile devices \parencite{unity}. Based on the job listings of the parent company one can assume they are actively looking for people to work on supporting WebGPU. 
+
+\subsubsection{Unreal Engine}
+
+Unreal Engine is an open-source but paid game engine used in games, movies and simulations \parencite{unreal}. It did support WebGL but plans to drop support for any web-based platform as it wants to focus on native development only. 
