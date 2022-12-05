@@ -8,6 +8,32 @@
 % 
 %----------------------------------------------------------------
 
+\newcommand*{\codeThreejs}[1]{
+  \inputminted[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    linenos,
+    fontsize=\scriptsize,
+    breaklines=true,
+    highlightlines={30-39,43-49,81-84},
+    firstline=30,
+    lastline=84
+  ]{typescript}{#1}}
+
+\newcommand*{\codeBabylon}[1]{
+  \inputminted[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    linenos,
+    fontsize=\scriptsize,
+    breaklines=true,
+    highlightlines={21-27,39-45},
+    firstline=21,
+    lastline=45
+  ]{typescript}{#1}}
+
 \chapter{Libraries}
 
 \label{chap:Libraries}
@@ -35,28 +61,32 @@ Even though there are still some issues and not all of the features work as inte
 Which is also visible by the several different examples that are already online \parencite{three_examples}.
 As well as in our own example that we created using Three.js and the WebGPU renderer. \\
 
-\noindent Here it is visible how the scene setup with the camera can look like. \\
+Listing \ref{code:three-scene} shows the required setup for a simple scene in Three.js. \\
+First, one has to create each object invidually. Afterwards, they can be added to the scene.
 
-\codesnippet{30}{39}{typescript}{../threejs-example/src/main.ts}
+\begin{listing}
+  \centering
+  \codeThreejs{../threejs-example/src/main.ts}
+  \caption[Code Snippet: Three.js Example]
+  {
+    Scene, camera and WebGPU setup in Three.js, followed by simple object creation.
+    \imgcredit{Created by the authors.}
+  }
+  \label{code:three-scene}
+\end{listing}
 
-\noindent Before adding objects to a scene we have to create them.
-To showcase how it works with Three.js we show a codesnippet of the creation of a line.
 
-\codesnippet{43}{49}{typescript}{../threejs-example/src/main.ts}
-
-\noindent Last but not least the created objects have to be added into the scene to be visible.
-
-\codesnippet{81}{84}{typescript}{../threejs-example/src/main.ts}
-
-Adding some hover interactivity it is possible to get something that looks similiar to \ref{fig:three_image}.
+After adding hover interactivity it is possible to get create a scene that reacts to the position of the mouse cursor.
+The initial state of the scene can be seen in figure \ref{fig:three_img1}. The results of the hover effect are visible in figure \ref{fig:three_img2}.
 
 \begin{figure}[tp]
   \centering
   \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
   {images/three_example_img1.png}
   
-  \caption[An interactive Three.js example using WebGPU as renderer]
+  \caption[Three.js Example Without Mouse Interactivity]
   {
+  A simple Three.js example without the mouse hovering over any object.
   \imgcredit{Created by the authors.}
   }
   \label{fig:three_img1}
@@ -67,11 +97,12 @@ Adding some hover interactivity it is possible to get something that looks simil
   \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
   {images/three_example_img2.png}
   
-  \caption[An interactive Three.js example using WebGPU as renderer]
+  \caption[Three.js Example With Mouse Interactivity]
   {
+  A simple Three.js example with the mouse hovering over multiple objects.
   \imgcredit{Created by the authors.}
   }
-  \label{fig:three_img}
+  \label{fig:three_img2}
 \end{figure}
 
 \section{Babylon.js}
@@ -80,40 +111,35 @@ Last but not least there is Babylon.js.
 Babylon.js started the integration process for WebGPU already back in 2019 \parencite{babylon_start_webgpu}. 
 The first usable WebGPU renderer in Babylon.js was released with version 5.0 of the library \parencite{babylon_released}.
 Another milestone that Babylon.js was able to achieve was to got feature parity with the WebGL renderer back in January 2022 \parencite{babylon_parity}.
-Thus providing full WebGPU support for the library. \\
+Thus providing full WebGPU support for the library.
 
-\noindent Similiar to Three.js it is possible to create a example scene quite easily.
-First we have to create a scene and specify the engine we want to use.
+Similar to Three.js it is possible to create an example scene quite easily.
+First, one has to create a scene and specify the engine one wants to use.
+After this we can start creating and adding objects to the scene, as shown in listing \ref{code:babylon-scene}.
 
-\codesnippet{118}{121}{typescript}{../babylon-js-example/src/main.ts}
-\codesnippet{21}{27}{typescript}{../babylon-js-example/src/main.ts}
+\begin{listing}
+  \centering
+  \codesnippet{19}{55}{typescript}{../babylon-js-example/src/main.ts}
+  \caption[Code Snippet: Babylon Example]
+  {
+    Scene, camera and WebGPU setup in Babylon.js, followed by simple object creation.
+    \imgcredit{Created by the authors.}
+  }
+  \label{code:babylon-scene}
+\end{listing}
 
-\noindent After this we can start adding creating and adding objects to the scene.
-
-\codesnippet{39}{45}{typescript}{../babylon-js-example/src/main.ts}
-
-\noindent Last but not least actual interactivity can be added.
-
+Figure \ref{fig:babylon_example_img1} shows an interactive example of a Babylon.js scene where the user can drag and drop
+a cube.
 \begin{figure}[tp]
   \centering
   \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
   {images/babylon_example_img1.png}
   
-  \caption[An interactive Babylon.js example using WebGPU as renderer]
+  \caption[Babylon.js Example With Mouse Interactivity]
   {
+  Simple interactive example of a Babylon.js scene where the user can drag and drop a cube.
   \imgcredit{Created by the authors.}
   }
   \label{fig:babylon_example_img1}
 \end{figure}
 
-\begin{figure}[tp]
-  \centering
-  \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
-  {images/babylon_example_img2.png}
-  
-  \caption[An interactive Babylon.js example using WebGPU as renderer]
-  {
-  \imgcredit{Created by the authors.}
-  }
-  \label{fig:babylon_example_img2}
-\end{figure}
