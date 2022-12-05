@@ -27,7 +27,7 @@ This document mainly focuses on the \textbf{render pipeline}, which houses both 
 \section{Shaders}
 Shaders are programmable stages within GPU pipelines, written in a special shader language in order to adhere
 to the requirements of the GPU.
-The shading language for WebGPU is called WSGL, and will be introduced in chapter \ref{chap:PracticalExample}.
+The shading language for WebGPU is called WGSL, and will be introduced in chapter \ref{chap:PracticalExample}.
 There are two programmable stages within the render pipeline:
 The vertex shader and the fragment shader.
 
@@ -43,9 +43,9 @@ Image \ref{fig:vertex-01} illustrates simple example of a vertex shader for a tr
 \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
 {images/vertex-01.pdf}
 
-\caption[Vertex shader, example illustration]
+\caption[Vertex Shader, Example Illustration]
 {
-  Exemplary illustration of a vertex shader for a primitive triangle.
+  An exemplary illustration of a vertex shader for a primitive triangle.
   The vertices V1, V2, V3 define the vertices of the primitive.
 \imgcredit{Created by the authors.}
 }
@@ -77,9 +77,9 @@ The rasterized points are shaded blue, all discarded pixels are white.
 \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
 {images/rasterization.pdf}
 
-\caption[Rasterization, example illustration]
+\caption[Rasterization, Example Illustration]
 {
-  Exemplary illustration of the rasterization step for a primitive triangle.
+  An exemplary illustration of the rasterization step for a primitive triangle.
   Rasterized points inside the primitive are coloured in blue, whilst points outside are displayed white.
 \imgcredit{Created by the authors.}
 }
@@ -102,9 +102,9 @@ Figure \ref{fig:multisampling} illustrates the process of multisampling on an ex
 \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
 {images/multisampling.pdf}
 
-\caption[Multisampling, example illustration]
+\caption[Multisampling, Example Illustration]
 {
-  Exemplary illustration of multisampling during the rasterization step for a primitive triangle.
+  An exemplary illustration of multisampling during the rasterization step for a primitive triangle.
   Sample points are indicated with red circles for two of the pixels. All pixels are evaluated with the same
   sample mask, and the final pixel colour value is the result of interpolating between all sample points.
 \imgcredit{Created by the authors.}
@@ -125,9 +125,9 @@ Figure \ref{fig:fragment-01} shows the desired output of this stage.
 \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
 {images/fragment-01.pdf}
 
-\caption[Fragment shader, example illustration]
+\caption[Fragment Shader, Example Illustration]
 {
-  Exemplary illustration of a fragment shader for a primitive triangle to showcase the desired output.
+  An exemplary illustration of a fragment shader for a primitive triangle to showcase the desired output.
   Each vertex is defined by its position and an associated colour value.
   For a uniformly coloured triangle, all three colour values must be equal.
 \imgcredit{Created by the authors.}

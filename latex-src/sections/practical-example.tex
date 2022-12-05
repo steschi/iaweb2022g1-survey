@@ -44,7 +44,7 @@ This section covers the general program flow and the essential steps needed for 
 
 The inherent complexity of programming fast Web Graphics via WebGPU stems from the way one has to interact with a GPU itself.
 In contrast to simpler 2D graphics like SVG and Canvas2D WebGPU is just an abstraction layer on top of broadly used GPU APIs like Vulkan.
-It, therefore, has to perform similar steps as native software rendering 3D scenes. As can be seen in listing \ref*{fig:webgpu-explain} we first need to
+It, therefore, has to perform similar steps as native software rendering 3D scenes. As can be seen in figure \ref*{fig:webgpu-explain} we first need to
 collect all information of a scene, like Vertex positions and color, as well as the matching WGSL Shader Code and mangle it via the CPU into a properly structured
 buffer on the GPU's V-RAM. Only then can the CPU hand over control and allow the GPU to start execution of the WGSL Shader Code which will use the buffer to render a proper scene.
 This workflow is described in more detail in the following sections.
@@ -55,9 +55,9 @@ This workflow is described in more detail in the following sections.
   \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
   {images/wgpu-explain.pdf}
 
-  \caption[Dataflow in WebGPU, example]
+  \caption[Dataflow in WebGPU Example]
   {
-    An exemplary illustration of how instructions and data of a 3d scene have to be handled
+    An exemplary illustration of how instructions and data of a 3D scene have to be handled
     to use WebGPU.
     \imgcredit{Created by the authors.}
   }
@@ -84,7 +84,7 @@ into its numeric values. The additional function \emph{encodeVertices()} is desi
 \begin{listing}
 
   \centering
-  \code{../shared/src/vertex.ts}
+  \code{../software/packages/shared/src/vertex.ts}
 
   \caption[Code Snippet: Vertex Encoding]
   {
@@ -103,11 +103,11 @@ to hand over control to the GPU.
 
 \begin{listing}
   \centering
-  \codesnippet{4}{22}{typescript}{../webgpu-simple/src/helpers.ts}
+  \codesnippet{4}{22}{typescript}{../software/packages/webgpu-simple/src/helpers.ts}
 
-  \caption[Code Snippet: createBuffer]
+  \caption[Code Snippet: \emph{createBuffer}]
   {
-    An exemplary illustration of how instructions and data of a 3d scene have to be handled
+    An exemplary illustration of how instructions and data of a 3D scene have to be handled
     to use WebGPU.
     \imgcredit{Created by the authors.}
   }
@@ -127,7 +127,7 @@ executed in parallel for each rasterized pixel of the scene to define the actual
 
   \centering
   \usemintedstyle{xcode}
-  \codesnippet{1}{19}{glsl}{../webgpu-simple/src/shader.wgsl}
+  \codesnippet{1}{19}{glsl}{../software/packages/webgpu-simple/src/shader.wgsl}
   \usemintedstyle{default}
 
   \caption[Code Snippet: WebGPU Shader Code]
@@ -138,7 +138,7 @@ executed in parallel for each rasterized pixel of the scene to define the actual
   \label{code:shader-code}
 \end{listing}
 
-\subsection{Step 4 - Setting up the final Pipeline}
+\subsection{Step 4 - Setting up the Final Pipeline}
 
 With all the previously mentioned parts in place, one can now set up the actual pipeline. As can be seen in listing \ref*{code:pipeline-setup} one first needs to access a \emph{HTMLCanvasElement}. This 
 then exposes a \emph{WebGPUConvasContext}. This context then allows the request of an adapter which in turn provides access to a \emph{GPUDevice}.
@@ -148,7 +148,7 @@ Within this step, the shader code of listing \ref*{section:shader-code} is passe
 \begin{listing}
 
   \centering
-  \codesnippet{11}{70}{typescript}{../webgpu-simple/src/main.ts}
+  \codesnippet{11}{70}{typescript}{../software/packages/webgpu-simple/src/main.ts}
 
   \caption[Code Snippet: WebGPU Pipeline]
   {

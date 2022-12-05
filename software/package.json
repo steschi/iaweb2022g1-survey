@@ -1,0 +1,17 @@
+{
+  "name": "iaweb2022g1-survey",
+  "private": true,
+  "workspaces": [
+    "./packages/**"
+  ],
+  "dependencies": {
+    "rimraf": "3.0.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  },
+  "scripts": {
+    "lint": "yarn prettier --write .",
+    "clean": "yarn rimraf ./packages/**/node_modules && yarn rimraf node_modules"
+  }
+}

@@ -9,7 +9,7 @@ These commands can be executed in the root folder
 
 ## useful commands inside workspaces
 
-These commands can be executed in a workspace folder (`babylon-js-example`, `rust-example`, `threejs-example`, `webgl-simple`, `webgpu-simple`)
+These commands can be executed in a workspace folder (`packages/babylon-js-example`, `packages/rust-example`, `packages/threejs-example`, `packages/webgl-simple`, `packages/webgpu-simple`)
 
 | Command        | Description                      |
 | -------------- | -------------------------------- |

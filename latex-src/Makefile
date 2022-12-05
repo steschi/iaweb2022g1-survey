@@ -2,7 +2,7 @@
 
 DOCNAME=survey
 
-all: survey
+all: survey clean
 
 .PHONY: clean
 
@@ -11,9 +11,10 @@ survey:
 	biber $(DOCNAME)
 	pdflatex -shell-escape $(DOCNAME).tex
 	pdflatex -shell-escape $(DOCNAME).tex
+	pdflatex -shell-escape $(DOCNAME).tex
 
 view: survey
 	open $(DOCNAME).pdf
 
 clean:
-	rm *.blg *.bbl *.aux *.log
+	rm -f *.blg *.bbl *.aux *.log *.dvi *.bcf *.blg *.lof *.out *.run.xml *.toc *.lol

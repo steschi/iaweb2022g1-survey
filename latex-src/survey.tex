@@ -13,6 +13,9 @@
 
 \documentclass[11pt,onecolumn,twoside]{report}
 
+\usepackage[T1]{fontenc}        % 8-bit output chars (must be before inputenx)
+\usepackage[utf8]{inputenx}     % input char encoding
+
 \usepackage[
   a4paper,
   twoside,
@@ -30,13 +33,13 @@
 % A4 paper is w=210m, h=297mm
 
 
-\newcommand{\thistitle}{Responsive Data Visualization}  % title
+\newcommand{\thistitle}{Fast Interactive Web Graphics with WebGPU}  % title
 \newcommand{\thissubject}{}  % leave empty for no subject
 \newcommand{\thisauthor}{Thomas Pinheiro de Souza, Stefan Schintler and Andreas Steinkellner}          % author
 % \newcommand{\thisauthor}{Keith Andrews, Tom Black, and Harry White}      % multiple authors
 \newcommand{\thiskeywords}{survey paper, skeleton, guidelines, template}   % keywords
 
-\newcommand{\thisdate}{04 Dec 2022}  % date of this version
+\newcommand{\thisdate}{05 Dec 2022}  % date of this version
 \newcommand{\thisyear}{2022}         % year of this version
 
 
@@ -67,12 +70,6 @@
 
 \setcounter{tocdepth}{3}        % lowest section level entered in ToC
 \setcounter{secnumdepth}{3}     % lowest section level still numbered
-
-
-
-
-\usepackage[T1]{fontenc}        % 8-bit output chars (must be before inputenx)
-\usepackage[utf8]{inputenx}     % input char encoding
 
 \usepackage[english,austrian,british]{babel}
 

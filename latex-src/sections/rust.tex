@@ -39,11 +39,9 @@ Since the WebGPU Shading Language (WGSL) is largely a syntactic mix between Rust
 working with WebGPU in Rust seems to be a natural fit.
 Over the course of this project, we have explored the combination of Rust and WebGPU by implementing a simple example.
 
-Rust provides a very easy way to compile code into WebAssembly through a package called \lstinline{wasm-bindgen}.
-The package \lstinline{wasm-bindgen-futures} is needed to wait for asynchronous operations within the browser.
+Rust provides a very easy way to compile code into WebAssembly through a package called \emph{wasm-bindgen}.
+The package \emph{wasm-bindgen-futures} is needed to wait for asynchronous operations within the browser.
 The following example was created by following the excellent tutorial on \textcite{rust-wgpu}.
-
-The complete code of all examples mentioned in this report can be examined on GitHub \parencite{github-repo}.
 
 
 \section{Steps}
@@ -52,16 +50,16 @@ The complete code of all examples mentioned in this report can be examined on Gi
 % Section: Repository Setup
 
 \subsection{Step 1 --- Repository Setup}
-WebGPU is provided to rust via the \lstinline{wgpu} package.
-Listing \ref{code:cargo} shows the \lstinline{Cargo.toml} file used in our minimal example.
+WebGPU is provided to rust via the \emph{wgpu} package.
+Listing \ref{code:cargo} shows the \emph{Cargo.toml} file used in our minimal example.
 
 \begin{listing}
   \centering
-  \rust{../rust-example/wasm/Cargo.toml}
+  \rust{../software/packages/rust-example/wasm/Cargo.toml}
 
   \caption[Code Snippet: Cargo.toml]
   {
-    A simple \lstinline{Cargo.toml} file for WebAssembly and WebGPU in Rust.
+    A simple \emph{Cargo.toml} file for WebAssembly and WebGPU in Rust.
     \imgcredit{Created by the authors.}
   }
   \label{code:cargo}
@@ -82,7 +80,7 @@ Afterwards, a new canvas element for WebGPU is pushed to the DOM, as demonstrate
 
 \begin{listing}
   \centering
-  \rustsnippet{165}{178}{../rust-example/wasm/src/lib.rs}
+  \rustsnippet{165}{178}{../software/packages/rust-example/wasm/src/lib.rs}
 
   \caption[Code Snippet: Canvas Setup]
   {
@@ -102,7 +100,7 @@ of the GPU handle, as demonstrated in listing \ref{code:rust-handle}.
 
 \begin{listing}
   \centering
-  \rustsnippet{23}{51}{../rust-example/wasm/src/lib.rs}
+  \rustsnippet{23}{51}{../software/packages/rust-example/wasm/src/lib.rs}
 
   \caption[Code Snippet: Backend, surface, adapter, and GPU handle setup]
   {
@@ -118,7 +116,7 @@ of the GPU handle, as demonstrated in listing \ref{code:rust-handle}.
 % Section: Shader and Viewport Configuration %
 
 \subsection{Step 4 --- Shader Generation, Viewport Configuration}
-Shader generation is done by including a \lstinline{*.wgsl} file according to the WebGPU specification.
+Shader generation is done by including a \emph{*.wgsl} file according to the WebGPU specification.
 After setting up the surface configuration with the appropriate viewport size and texture format,
 the pipeline can be created. The shader code can be examined in listing \ref{code:rust-wgsl}.
 The required Rust code to include the shader is shown in listing \ref{code:rust-shader}.
@@ -126,7 +124,7 @@ The required Rust code to include the shader is shown in listing \ref{code:rust-
 
 \begin{listing}
   \centering
-  \rust{../rust-example/wasm/src/shader.wgsl}
+  \rust{../software/packages/rust-example/wasm/src/shader.wgsl}
 
   \caption[Code Snippet: WGSL Shader Code]
   {
@@ -139,7 +137,7 @@ The required Rust code to include the shader is shown in listing \ref{code:rust-
 
 \begin{listing}
   \centering
-  \rustsnippet{53}{65}{../rust-example/wasm/src/lib.rs}
+  \rustsnippet{53}{65}{../software/packages/rust-example/wasm/src/lib.rs}
 
   \caption[Code Snippet: Shader and Viewport Setup]
   {
@@ -159,7 +157,7 @@ as demonstrated in listing \ref{code:rust-render}.
 
 \begin{listing}
   \centering
-  \rustsnippet{181}{192}{../rust-example/wasm/src/lib.rs}
+  \rustsnippet{181}{192}{../software/packages/rust-example/wasm/src/lib.rs}
 
   \caption[Code Snippet: Event Loop Setup]
   {
