@@ -408,3 +408,4 @@ TSWLatexianTemp*
 .DS_Store
 
 *.zip
+rust-example/wasm/target

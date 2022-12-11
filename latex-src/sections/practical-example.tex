@@ -3,27 +3,37 @@
 %  File    :  practical-example.tex
 %
 %  Authors :  Pinheiro de Souza, Schintler, Steinkellner
-% 
+%
 %  Created :  22 Nov 2022
-% 
+%
 %----------------------------------------------------------------
 
 \chapter{Practical Example of using WebGPU}
 
 \label{chap:PracticalExample}
 
-Due to the nature of rendering directly with a GPU using WebGPU is a rather tedious process as the essential code to render a scene needs to be executed on the GPU.
-This section covers the general program flow and the essential steps needed for a minimal working example. Due to WebGPU's complexity, not all details of the implementation are explained in detail. 
+Due to the nature of rendering directly with a GPU using WebGPU is a
+rather tedious process as the essential code to render a scene needs to
+be executed on the GPU. This section covers the general program flow and
+the essential steps needed for a minimal working example. Due to
+WebGPU's complexity, not all details of the implementation are explained
+in detail. 
 
 
 \section{General Flow}
 
-The inherent complexity of programming fast Web Graphics via WebGPU stems from the way one has to interact with a GPU itself.
-In contrast to simpler 2D graphics like SVG and Canvas2D WebGPU is just an abstraction layer on top of broadly used GPU APIs like Vulkan.
-It, therefore, has to perform similar steps as native software rendering 3D scenes. As can be seen in figure \ref*{fig:webgpu-explain} we first need to
-collect all information of a scene, like Vertex positions and color, as well as the matching WGSL Shader Code and mangle it via the CPU into a properly structured
-buffer on the GPU's V-RAM. Only then can the CPU hand over control and allow the GPU to start execution of the WGSL Shader Code which will use the buffer to render a proper scene.
-This workflow is described in more detail in the following sections.
+The inherent complexity of programming fast Web Graphics via WebGPU
+stems from the way one has to interact with a GPU itself. In contrast to
+simpler 2D graphics like SVG and Canvas2D WebGPU is just an abstraction
+layer on top of broadly used GPU APIs like Vulkan. It, therefore, has to
+perform similar steps as native software rendering 3D scenes. As can be
+seen in figure \ref*{fig:webgpu-explain} we first need to collect all
+information of a scene, like Vertex positions and color, as well as the
+matching WGSL Shader Code and mangle it via the CPU into a properly
+structured buffer on the GPU's V-RAM. Only then can the CPU hand over
+control and allow the GPU to start execution of the WGSL Shader Code
+which will use the buffer to render a proper scene. This workflow is
+described in more detail in the following sections.
 
 
 \begin{figure}[tp]
@@ -32,9 +42,8 @@ This workflow is described in more detail in the following sections.
   {images/wgpu-explain.pdf}
 
   \caption[Dataflow in WebGPU Example]
-  {
-    An exemplary illustration of how instructions and data of a 3D scene have to be handled
-    to use WebGPU.
+  { An exemplary illustration of how instructions and data of a 3D scene
+    have to be handled to use WebGPU.
     \imgcredit{Created by the authors.}
   }
   \label{fig:webgpu-explain}
@@ -43,65 +52,62 @@ This workflow is described in more detail in the following sections.
 
 \section{Steps}
 
-To successfully render a 3D scene using WebGPU several different steps are required. 
-This section covers the essential steps needed for a minimal working example.
+To successfully render a 3D scene using WebGPU several different steps
+are required. This section covers the essential steps needed for a
+minimal working example.
 
 
 
 \subsection{Step 1 - Encoding the Vertex Information}
 \label{section:practical-step-1}
 
-First of all, as mentioned above, the whole scene needs to be encoded into a stream of numbers. WebGPU does not offer any form of scene layout, meaning a developer
-has to come up with his structure for storing a scene's information about the location of objects, vertices and their colors. As can be seen in listing \ref*{code:vertex-encode} a general 
-purpose \emph{Vertex} class is created to hold all the necessary information required to form a basic scene. It exposes a  \emph{encode()} function to easily merge all properties of a single vertex 
-into its numeric values. The additional function \emph{encodeVertices()} is designed to then combine multiple vertices into a single stream of numeric values. 
+First of all, as mentioned above, the whole scene needs to be encoded
+into a stream of numbers. WebGPU does not offer any form of scene
+layout, meaning a developer has to come up with his structure for
+storing a scene's information about the location of objects, vertices
+and their colors. As can be seen in listing \ref*{code:vertex-encode} a
+general purpose \emph{Vertex} class is created to hold all the necessary
+information required to form a basic scene. It exposes a
+\emph{encode()} function to easily merge all properties of a single
+vertex into its numeric values. The additional function
+\emph{encodeVertices()} is designed to then combine multiple vertices
+into a single stream of numeric values. 
 
 \begin{samepage}
-  \lstinputlisting[
-    float=tp,
-    xleftmargin=0cm,              % no extra margins for floats
+  \lstinputlisting[float=tp, xleftmargin=0cm,
+    % no extra margins for floats
     xrightmargin=0cm,             % no extra margins for floats
-    basicstyle=\footnotesize\ttfamily,
-    frame=shadowbox,
-    numbers=left,
-    caption={[Code Snippet: Vertex Encoding]
-    {
-      An exemplary illustration of how to encode vertex information for use in WebGPU
+    basicstyle=\footnotesize\ttfamily, frame=shadowbox, numbers=left,
+    caption={[Code Snippet: Vertex Encoding] { An exemplary illustration
+    of how to encode vertex information for use in WebGPU
       \imgcredit{Created by the authors.}
-    }},
-    language=TypeScript,
-    firstnumber=1,
-    label=code:vertex-encode
-    ]
+    }}, language=TypeScript, firstnumber=1, label=code:vertex-encode ]
     {listings/vertex.ts}
 \end{samepage}
 
 
 \subsection{Step 2 - Creating a Buffer}
 
-The encoded data created in listing \ref*{section:practical-step-1} then needs to be stored in the GPU itself. To accomplish this a buffer needs to be created, as can be seen in listing \ref*{code:create-buffer}. 
-WebGPU exposes a \emph{createBuffer()} function on each \emph{GPUDevice} which allows interaction with the GPU's memory. Buffer sizes need to align to 4-byte steps and each buffer needs to 
-have a designated usage, resembling in which stage the buffer is used (vertex stage or fragment stage). After writing the data to the buffer it is important to also \emph{unmap()} the buffer 
-to hand over control to the GPU. 
+The encoded data created in listing \ref*{section:practical-step-1} then
+needs to be stored in the GPU itself. To accomplish this a buffer needs
+to be created, as can be seen in listing \ref*{code:create-buffer}.
+WebGPU exposes a \emph{createBuffer()} function on each \emph{GPUDevice}
+which allows interaction with the GPU's memory. Buffer sizes need to
+align to 4-byte steps and each buffer needs to have a designated usage,
+resembling in which stage the buffer is used (vertex stage or fragment
+stage). After writing the data to the buffer it is important to also
+\emph{unmap()} the buffer to hand over control to the GPU. 
 
 \begin{samepage}
-  \lstinputlisting[
-    float=tp,
-    xleftmargin=0cm,              % no extra margins for floats
+  \lstinputlisting[ float=tp, xleftmargin=0cm,
+    % no extra margins for floats
     xrightmargin=0cm,             % no extra margins for floats
-    basicstyle=\footnotesize\ttfamily,
-    frame=shadowbox,
-    numbers=left,
-    caption={[Code Snippet: \emph{createBuffer}]
-    {
-      An exemplary illustration of how instructions and data of a 3D scene have to be handled
-      to use WebGPU.
+    basicstyle=\footnotesize\ttfamily, frame=shadowbox, numbers=left,
+    caption={[Code Snippet: \emph{createBuffer}] { An exemplary
+    illustration of how instructions and data of a 3D scene have to be
+    handled to use WebGPU.
       \imgcredit{Created by the authors.}
-    }},
-    language=TypeScript,
-    firstnumber=1,
-    label=code:create-buffer
-    ]
+    }}, language=TypeScript, firstnumber=1, label=code:create-buffer ]
     {listings/helper.ts}
 \end{samepage}
 
@@ -109,55 +115,53 @@ to hand over control to the GPU.
 \subsection{Step 3 - WGSL Shader Code}
 \label{section:shader-code}
 
-Even after the data is encoded and written on the GPU RAM one still needs to instruct the GPU how the data is actually to be processed. This is accomplished by writing custom
-shader code which is executed on the GPU in parallel. A minimal example can be seen in listing \ref*{code:shader-code}.  It contains 2 main functions for the vertex and fragment stages respectively. 
-The function \emph{vertex\_main} is executed once per vertex and is responsible for setting an appropriate position and color per vertex. Afterwards, the function \emph{fragment\_main} is 
-executed in parallel for each rasterized pixel of the scene to define the actual color value of each pixel. 
+Even after the data is encoded and written on the GPU RAM one still
+needs to instruct the GPU how the data is actually to be processed. This
+is accomplished by writing custom shader code which is executed on the
+GPU in parallel. A minimal example can be seen in listing
+\ref*{code:shader-code}.  It contains 2 main functions for the vertex
+and fragment stages respectively. The function \emph{vertex\_main} is
+executed once per vertex and is responsible for setting an appropriate
+position and color per vertex. Afterwards, the function
+\emph{fragment\_main} is executed in parallel for each rasterized pixel
+of the scene to define the actual color value of each pixel. 
 
 \begin{samepage}
-  \lstinputlisting[
-    float=tp,
-    xleftmargin=0cm,              % no extra margins for floats
+  \lstinputlisting[ float=tp, xleftmargin=0cm,
+    % no extra margins for floats
     xrightmargin=0cm,             % no extra margins for floats
-    basicstyle=\footnotesize\ttfamily,
-    frame=shadowbox,
-    numbers=left,
-    caption={[Code Snippet: WebGPU Shader Code]
-    {
-      An exemplary code snippet of how to write WGSL Shader Code
+    basicstyle=\footnotesize\ttfamily, frame=shadowbox, numbers=left,
+    caption={[Code Snippet: WebGPU Shader Code] { An exemplary code
+    snippet of how to write WGSL Shader Code
       \imgcredit{Created by the authors.}
-    }},
-    language=WGSL,
-    firstnumber=1,
-    label=code:shader-code
-    ]
+    }}, language=WGSL, firstnumber=1, label=code:shader-code ]
     {listings/shader.wgsl}
 \end{samepage}
 
 
 \subsection{Step 4 - Setting up the Final Pipeline}
 
-With all the previously mentioned parts in place, one can now set up the actual pipeline. As can be seen in listing \ref*{code:pipeline-setup} one first needs to access a \emph{HTMLCanvasElement}. This 
-then exposes a \emph{WebGPUConvasContext}. This context then allows the request of an adapter which in turn provides access to a \emph{GPUDevice}.
-This device can then be used to create a buffer with the encoded vertices data. Afterward, a render pipeline is created by supplying the necessary information for both the vertex and the fragment stage.
-Within this step, the shader code of listing \ref*{section:shader-code} is passed along as well. At last, a \emph{CommandEncoder} is used to encode a GPU command to render an actual image from the pipeline to the respective canvas on the screen. 
+With all the previously mentioned parts in place, one can now set up the
+actual pipeline. As can be seen in listing \ref*{code:pipeline-setup}
+one first needs to access a \emph{HTMLCanvasElement}. This then exposes
+a \emph{WebGPUConvasContext}. This context then allows the request of an
+adapter which in turn provides access to a \emph{GPUDevice}. This device
+can then be used to create a buffer with the encoded vertices data.
+Afterward, a render pipeline is created by supplying the necessary
+information for both the vertex and the fragment stage. Within this
+step, the shader code of listing \ref*{section:shader-code} is passed
+along as well. At last, a \emph{CommandEncoder} is used to encode a GPU
+command to render an actual image from the pipeline to the respective
+canvas on the screen. 
 
 \begin{samepage}
-  \lstinputlisting[
-    float=tp,
-    xleftmargin=0cm,              % no extra margins for floats
+  \lstinputlisting[ float=tp, xleftmargin=0cm,
+    % no extra margins for floats
     xrightmargin=0cm,             % no extra margins for floats
-    basicstyle=\footnotesize\ttfamily,
-    frame=shadowbox,
-    numbers=left,
-    caption={[Code Snippet: WebGPU Pipeline]
-    {
-      An exemplary illustration of how to set up a WebGPU pipeline
+    basicstyle=\footnotesize\ttfamily, frame=shadowbox, numbers=left,
+    caption={[Code Snippet: WebGPU Pipeline] { An exemplary illustration
+    of how to set up a WebGPU pipeline
       \imgcredit{Created by the authors.}
-    }},
-    language=TypeScript,
-    firstnumber=11,
-    label=code:pipeline-setup
-    ]
+    }}, language=TypeScript, firstnumber=11, label=code:pipeline-setup ]
     {listings/main.ts}
 \end{samepage}

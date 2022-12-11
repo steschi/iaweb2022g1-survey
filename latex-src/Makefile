@@ -7,11 +7,11 @@ all: survey clean
 .PHONY: clean
 
 survey:
-	pdflatex -shell-escape $(DOCNAME).tex
+	pdflatex $(DOCNAME).tex
 	biber $(DOCNAME)
-	pdflatex -shell-escape $(DOCNAME).tex
-	pdflatex -shell-escape $(DOCNAME).tex
-	pdflatex -shell-escape $(DOCNAME).tex
+	pdflatex $(DOCNAME).tex
+	pdflatex $(DOCNAME).tex
+	pdflatex $(DOCNAME).tex
 
 view: survey
 	open $(DOCNAME).pdf

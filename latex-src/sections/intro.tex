@@ -3,63 +3,71 @@
 %  File    :  intro.tex
 %
 %  Authors :  Pinheiro de Souza, Schintler, Steinkellner
-% 
+%
 %  Created :  22 Nov 2022
-% 
+%
 %----------------------------------------------------------------
 
 
 \chapter{Introduction}
 
 \label{chap:Intro}
-Web graphics are a way to include visual scenes on websites or web applications.
-While static images can be easily included to an existing site by using the HTML image tag,
-interactivity is often a crucially important feature needed to bring ideas or scenes to life.
-It can have a positive impact on overall site engagement \parencite{web-engagement-literature}.
-Interactivity can be a very broad term to define, but it includes anything a user can do within
-a graphic to manipulate the scene. \\
-
-The complete code of all examples mentioned in this report can be examined on GitHub \parencite{github-repo}.
+Web graphics are a way to include visual scenes on websites or web
+applications. While static images can be easily included to an existing
+site by using the HTML image tag, interactivity is often a crucially
+important feature needed to bring ideas or scenes to life. It can have a
+positive impact on overall site engagement
+\parencite{web-engagement-literature}. Interactivity can be a very broad
+term to define, but it includes anything a user can do within a graphic
+to manipulate the scene. The complete code of all examples mentioned in
+this report can be examined on GitHub \parencite{github-repo}.
 
 \section{Two-Dimensional Web Graphics}
-The traditional two-dimensional approaches of including interactive
-web graphics to a website use either SVG or Canvas2D.
-SVG is a declarative specification, similar to HTML or XML, which produces crisp vector
-graphics with a limited set of supported interactivity through hover and transformation events.
-Canvas2D is an imperative way of rendering to a scene by using JavaScript.
-Instead of relying on declaratively positioned nodes, the scene is rendered iteratively
-through a sequence of draw calls, akin to physically moving a pen across a physical paper canvas.
+The traditional two-dimensional approaches of including interactive web
+graphics to a website use either SVG or Canvas2D. SVG is a declarative
+specification, similar to HTML or XML, which produces crisp vector
+graphics with a limited set of supported interactivity through hover and
+transformation events. Canvas2D is an imperative way of rendering to a
+scene by using JavaScript. Instead of relying on declaratively
+positioned nodes, the scene is rendered iteratively through a sequence
+of draw calls, akin to physically moving a pen across a physical paper
+canvas.
 
 \section{Two- and Three-Dimensional Web Graphics}
-For more complex two-dimensional, or even three-dimensional scenes,
-the capabilities of the GPU can be utilized through the means of WebGL or WebGPU.
-Both WebGL and WebGPU are actively developed and maintained by the Khronos Group, a consortium
-of leading technology companies, focussed on the development and maintenance of
-interoperability standards for three-dimensional graphics, augmented reality standards and
-machine learning \parencite{khronos-web}.
+For more complex two-dimensional, or even three-dimensional scenes, the
+capabilities of the GPU can be utilized through the means of WebGL or
+WebGPU. Both WebGL and WebGPU are actively developed and maintained by
+the Khronos Group, a consortium of leading technology companies,
+focussed on the development and maintenance of interoperability
+standards for three-dimensional graphics, augmented reality standards
+and machine learning \parencite{khronos-web}.
 
 \subsection{WebGL}
-WebGL is an abstraction layer (wrapper) over the OpenGL graphics library.
-This enables the usage of high performance OpenGL shader code with JavaScript.
-It is natively supported by all major browsers and has remained the current standard for
-complex 3D rendering.
-
-Many existing programs work natively with WebGL, creating a large ecosystem of usable libraries
-and tools that either utilize WebGL directly or allow export to WebGL code.
-The project started in 2009, based on the OpenGL ES 3.0 specification.
-Development slowed down in 2017, as development funding largely shifted towards WebGPU.
-One of the drawbacks of WebGL is that lacking support for compute shaders, a set of shaders
-specifically useful for machine learning and matrix manipulation tasks.
+WebGL is an abstraction layer (wrapper) over the OpenGL graphics
+library. This enables the usage of high performance OpenGL shader code
+with JavaScript. It is natively supported by all major browsers and has
+remained the current standard for complex 3D rendering.
+%
+Many existing programs work natively with WebGL, creating a large
+ecosystem of usable libraries and tools that either utilize WebGL
+directly or allow export to WebGL code. The project started in 2009,
+based on the OpenGL ES 3.0 specification. Development slowed down in
+2017, as development funding largely shifted towards WebGPU. One of the
+drawbacks of WebGL is that lacking support for compute shaders, a set of
+shaders specifically useful for machine learning and matrix manipulation
+tasks.
 
 \subsection{WebGPU}
-WebGPU is the natural successor to the WebGL specification.
-With the support of major companies like Google and Mozilla, it went through steady
-development since 2017, and is expected to release in quarter four of 2022.
-WebGPU is an abstraction layer that drives Vulkan, Metal or DirectX 12 natively.
-The GPU hardware is accessed indirectly over this abstraction layer.
-This approach allows developers to target multiple platforms with a single set of source code.
-
-Since the specification is still in development, no major browsers natively support WebGPU
-out of the box. All browsers support the specification after enabling an unstable feature flag.
-A broader audience is targeted through current Google Chrome Origin Trials.
+WebGPU is the natural successor to the WebGL specification. With the
+support of major companies like Google and Mozilla, it went through
+steady development since 2017, and is expected to release in quarter
+four of 2022. WebGPU is an abstraction layer that drives Vulkan, Metal
+or DirectX 12 natively. The GPU hardware is accessed indirectly over
+this abstraction layer. This approach allows developers to target
+multiple platforms with a single set of source code.
+%
+Since the specification is still in development, no major browsers
+natively support WebGPU out of the box. All browsers support the
+specification after enabling an unstable feature flag. A broader
+audience is targeted through current Google Chrome Origin Trials.
 

@@ -3,9 +3,9 @@
 %  File    :  rust.tex
 %
 %  Authors :  Pinheiro de Souza, Schintler, Steinkellner
-% 
+%
 %  Created :  22 Nov 2022
-% 
+%
 %----------------------------------------------------------------
 
 
@@ -13,73 +13,63 @@
 
 \label{chap:Rust}
 
-Since the WebGPU Shading Language (WGSL) is largely a syntactic mix between Rust and C,
-working with WebGPU in Rust seems to be a natural fit.
-Over the course of this project, we have explored the combination of Rust and WebGPU by implementing a simple example.
+Since the WebGPU Shading Language (WGSL) is largely a syntactic mix
+between Rust and C, working with WebGPU in Rust seems to be a natural
+fit. Over the course of this project, we have explored the combination
+of Rust and WebGPU by implementing a simple example.
+%
+Rust provides a very easy way to compile code into WebAssembly through a
+package called \emph{wasm-bindgen}. The package
+\emph{wasm-bindgen-futures} is needed to wait for asynchronous
+operations within the browser. The following example was created by
+following the excellent tutorial on \textcite{rust-wgpu}.
 
-Rust provides a very easy way to compile code into WebAssembly through a package called \emph{wasm-bindgen}.
-The package \emph{wasm-bindgen-futures} is needed to wait for asynchronous operations within the browser.
-The following example was created by following the excellent tutorial on \textcite{rust-wgpu}.
-
-
-\section{Steps}
 
 % --------------------------------------------------------------------------- %
 % Section: Repository Setup
 
-\subsection{Step 1 --- Repository Setup}
-WebGPU is provided to rust via the \emph{wgpu} package.
-Listing \ref{code:cargo} shows the \emph{Cargo.toml} file used in our minimal example.
+\section{Step 1 --- Repository Setup}
+WebGPU is provided to rust via the \emph{wgpu} package. Listing
+\ref{code:cargo} shows the \emph{Cargo.toml} file used in our minimal
+example.
+%
+Once packages are properly setup and a module bundler like Vite or
+Webpack is configured to handle WASM files properly, implementation of
+the WebGPU code is fairly straightforward.
 
 \begin{samepage}
-  \lstinputlisting[
-    float=tp,
-    xleftmargin=0cm,              % no extra margins for floats
+  \lstinputlisting[ float=tp, xleftmargin=0cm,
+    % no extra margins for floats
     xrightmargin=0cm,             % no extra margins for floats
-    basicstyle=\footnotesize\ttfamily,
-    frame=shadowbox,
-    numbers=left,
-    caption={[Code Snippet: Cargo.toml]
-    {
-      A simple \emph{Cargo.toml} file for WebAssembly and WebGPU in Rust.
+    basicstyle=\footnotesize\ttfamily, frame=shadowbox, numbers=left,
+    caption={[Code Snippet: Cargo.toml] { A simple \emph{Cargo.toml}
+    file for WebAssembly and WebGPU in Rust.
       \imgcredit{Created by the authors.}
-    }},
-    firstnumber=1,
-    label=code:cargo
-    ]
-    {listings/wasm/Cargo.toml}
+    }}, firstnumber=1, label=code:cargo ] {listings/wasm/Cargo.toml}
 \end{samepage}
 
-
-Once packages are properly setup and a module bundler like Vite or Webpack is configured to handle WASM files properly,
-implementation of the WebGPU code is fairly straightforward.
 
 
 % --------------------------------------------------------------------------- %
 % Section: Creating the Canvas
 
-\subsection{Step 2 --- Creating the Canvas}
-Similar to the previous TypeScript example, the first step is always window and device acquisition, required in order
-to set up a canvas and a GPU handle to draw to. In Rust, this is done through requesting an HTML div element from the browser.
-Afterwards, a new canvas element for WebGPU is pushed to the DOM, as demonstrated in listing \ref{code:rust-canvas}.
+\section{Step 2 --- Creating the Canvas}
+Similar to the previous TypeScript example, the first step is always
+window and device acquisition, required in order to set up a canvas and
+a GPU handle to draw to. In Rust, this is done through requesting an
+HTML div element from the browser. Afterwards, a new canvas element for
+WebGPU is pushed to the DOM, as demonstrated in listing
+\ref{code:rust-canvas}.
 
 \begin{samepage}
-  \lstinputlisting[
-    float=tp,
-    xleftmargin=0cm,              % no extra margins for floats
+  \lstinputlisting[ float=tp, xleftmargin=0cm,
+    % no extra margins for floats
     xrightmargin=0cm,             % no extra margins for floats
-    basicstyle=\footnotesize\ttfamily,
-    frame=shadowbox,
-    numbers=left,
-    caption={[Code Snippet: Canvas Setup]
-    {
-      Example of setting up a canvas element inside the HTML DOM via Rust.
+    basicstyle=\footnotesize\ttfamily, frame=shadowbox, numbers=left,
+    caption={[Code Snippet: Canvas Setup] { Example of setting up a
+    canvas element inside the HTML DOM via Rust.
       \imgcredit{Created by the authors.}
-    }},
-    language=Rust,
-    firstnumber=165,
-    label=code:rust-canvas
-    ]
+    }}, language=Rust, firstnumber=165, label=code:rust-canvas ]
     {listings/wasm/lib_canvas.rs}
 \end{samepage}
 
@@ -87,78 +77,59 @@ Afterwards, a new canvas element for WebGPU is pushed to the DOM, as demonstrate
 % --------------------------------------------------------------------------- %
 % Section: GPU Handle Acquisition
 
-\subsection{Step 3 --- GPU Handle Acquisition}
-The following stages start with initializing the WebGPU backend, followed by surface and adapter creation and acquisition
-of the GPU handle, as demonstrated in listing \ref{code:rust-handle}.
+\section{Step 3 --- GPU Handle Acquisition}
+The following stages start with initializing the WebGPU backend,
+followed by surface and adapter creation and acquisition of the GPU
+handle, as demonstrated in listing \ref{code:rust-handle}.
 
 \begin{samepage}
-  \lstinputlisting[
-    float=tp,
-    xleftmargin=0cm,              % no extra margins for floats
+  \lstinputlisting[ float=tp, xleftmargin=0cm,
+    % no extra margins for floats
     xrightmargin=0cm,             % no extra margins for floats
-    basicstyle=\footnotesize\ttfamily,
-    frame=shadowbox,
-    numbers=left,
-    caption={[Code Snippet: Backend, surface, adapter, and GPU handle setup]
-    {
-      Example code of setting up the initial backend for WebGPU, followed by surface creation on the
-      specified window. Afterwards, an adapter is created and the handle to the GPU is requested.
+    basicstyle=\footnotesize\ttfamily, frame=shadowbox, numbers=left,
+    caption={[Code Snippet: Backend, Surface, Adapter, and GPU Handle
+    Setup] { Example code of setting up the initial backend for WebGPU,
+    followed by surface creation on the specified window. Afterwards, an
+    adapter is created and the handle to the GPU is requested.
       \imgcredit{Created by the authors.}
-    }},
-    language=Rust,
-    firstnumber=23,
-    label=code:rust-handle
-    ]
+    }}, language=Rust, firstnumber=23, label=code:rust-handle ]
     {listings/wasm/lib_handle.rs}
 \end{samepage}
 
 % --------------------------------------------------------------------------- %
 % Section: Shader and Viewport Configuration %
 
-\subsection{Step 4 --- Shader Generation, Viewport Configuration}
-Shader generation is done by including a \emph{*.wgsl} file according to the WebGPU specification.
-After setting up the surface configuration with the appropriate viewport size and texture format,
-the pipeline can be created. The shader code can be examined in listing \ref{code:rust-wgsl}.
-The required Rust code to include the shader is shown in listing \ref{code:rust-shader}.
+\section{Step 4 --- Shader Generation, Viewport Configuration}
+Shader generation is done by including a \emph{*.wgsl} file according to
+the WebGPU specification. After setting up the surface configuration
+with the appropriate viewport size and texture format, the pipeline can
+be created. The shader code can be examined in listing
+\ref{code:rust-wgsl}. The required Rust code to include the shader is
+shown in listing \ref{code:rust-shader}.
 
 
 \begin{samepage}
-  \lstinputlisting[
-    float=tp,
-    xleftmargin=0cm,              % no extra margins for floats
+  \lstinputlisting[ float=tp, xleftmargin=0cm,
+    % no extra margins for floats
     xrightmargin=0cm,             % no extra margins for floats
-    basicstyle=\footnotesize\ttfamily,
-    frame=shadowbox,
-    numbers=left,
-    caption={[Code Snippet: WGSL Shader Code]
-    {
-      Example code of a simple triangular vertex and fragment shader pair.
+    basicstyle=\footnotesize\ttfamily, frame=shadowbox, numbers=left,
+    caption={[Code Snippet: WGSL Shader Code] { Example code of a simple
+    triangular vertex and fragment shader pair.
       \imgcredit{Created by the authors.}
-    }},
-    language=WGSL,
-    firstnumber=1,
-    label=code:rust-wgsl
-    ]
+    }}, language=WGSL, firstnumber=1, label=code:rust-wgsl ]
     {listings/wasm/shader.wgsl}
 \end{samepage}
 
 \begin{samepage}
-  \lstinputlisting[
-    float=tp,
-    xleftmargin=0cm,              % no extra margins for floats
+  \lstinputlisting[ float=tp, xleftmargin=0cm,
+    % no extra margins for floats
     xrightmargin=0cm,             % no extra margins for floats
-    basicstyle=\footnotesize\ttfamily,
-    frame=shadowbox,
-    numbers=left,
-    caption={[Code Snippet: Shader and Viewport Setup]
-    {
-      Example code of accessing the WebGPU shader inside our Rust example and configuring the viewport.
+    basicstyle=\footnotesize\ttfamily, frame=shadowbox, numbers=left,
+    caption={[Code Snippet: Shader and Viewport Setup] { Example code of
+    accessing the WebGPU shader inside our Rust example and configuring
+    the viewport.
       \imgcredit{Created by the authors.}
-    }},
-    language=Rust,
-    firstnumber=53,
-    label=code:rust-shader
-    ]
+    }}, language=Rust, firstnumber=53, label=code:rust-shader ]
     {listings/wasm/lib_shader.rs}
 \end{samepage}
 
@@ -166,26 +137,19 @@ The required Rust code to include the shader is shown in listing \ref{code:rust-
 % --------------------------------------------------------------------------- %
 % Section: Render Function
 
-\subsection{Step 5 --- Render Function}
-Finally, the simple example is completed by setting up a render function that is called for every frame,
-as demonstrated in listing \ref{code:rust-render}.
+\section{Step 5 --- Render Function}
+Finally, the simple example is completed by setting up a render function
+that is called for every frame, as demonstrated in listing
+\ref{code:rust-render}.
 
 \begin{samepage}
-  \lstinputlisting[
-    float=tp,
-    xleftmargin=0cm,              % no extra margins for floats
+  \lstinputlisting[ float=tp, xleftmargin=0cm,
+    % no extra margins for floats
     xrightmargin=0cm,             % no extra margins for floats
-    basicstyle=\footnotesize\ttfamily,
-    frame=shadowbox,
-    numbers=left,
-    caption={[Code Snippet: Event Loop Setup]
-    {
-      Example code of setting up an event loop to redraw on every frame in our Rust example.
+    basicstyle=\footnotesize\ttfamily, frame=shadowbox, numbers=left,
+    caption={[Code Snippet: Event Loop Setup] { Example code of setting
+    up an event loop to redraw on every frame in our Rust example.
       \imgcredit{Created by the authors.}
-    }},
-    language=Rust,
-    firstnumber=181,
-    label=code:rust-render
-    ]
+    }}, language=Rust, firstnumber=181, label=code:rust-render ]
     {listings/wasm/lib_render.rs}
 \end{samepage}

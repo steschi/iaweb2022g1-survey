@@ -11,21 +11,26 @@
 \chapter{Concluding Remarks}
 
 
-While WebGPU feels a little more modern than WebGL in its syntax, writing native WebGPU code
-still remains to be a complicated task. This is partly due to the fact that GPU compute units
-have to work in parallel without blocking, which requires a different program flow in
+While WebGPU feels a little more modern than WebGL in its syntax,
+writing native WebGPU code still remains to be a complicated task. This
+is partly due to the fact that GPU compute units have to work in
+parallel without blocking, which requires a different program flow in
 comparison to traditional CPU-based programming.
+%
+Although the WebGPU specification itself appears to be fairly complete,
+there are still some undocumented options that have to be tested through
+trial and error. Support in libraries and tools is growing, but still
+severely lacking in terms of development friendliness through static
+type checking or fully featured documentation.
+%
+According to our research, the best two libraries for WebGPU are
+currently Babylon.js and Three.js, but both suffer from the
+aforementioned problems.
 
-Although the WebGPU specification itself appears to be fairly complete, there are still some
-undocumented options that have to be tested through trial and error.
-Support in libraries and tools is growing, but still severely lacking in terms of development
-friendliness through static type checking or fully featured documentation.
-
-According to our research, the best two libraries for WebGPU are currently Babylon.js and
-Three.js, but both suffer from the aforementioned problems.
-
-While WebGPU will most likely replace WebGL in the long run, we would currently discourage from
-targeting it directly. It is advised to use a graphics library like Babylon.js or Three.js,
-which both feature settings to target either WebGL or WebGPU.
-It should be easy to port an existing application written with these Tools from WebGL over to
-WebGPU, once the standard has matured properly and browser support reaches a broader audience.
+While WebGPU will most likely replace WebGL in the long run, we would
+currently discourage from targeting it directly. It is advised to use a
+graphics library like Babylon.js or Three.js, which both feature
+settings to target either WebGL or WebGPU. It should be easy to port an
+existing application written with these Tools from WebGL over to WebGPU,
+once the standard has matured properly and browser support reaches a
+broader audience.

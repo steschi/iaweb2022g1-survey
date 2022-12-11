@@ -3,40 +3,46 @@
 %  File    :  fundamentals.tex
 %
 %  Authors :  Pinheiro de Souza, Schintler, Steinkellner
-% 
+%
 %  Created :  22 Nov 2022
-% 
+%
 %----------------------------------------------------------------
 
 \chapter{Fundamentals of Web Graphics}
 
 \label{chap:Fundamentals}
 
-Before diving into WebGPU example code, some fundamental concepts must be introduced.
-This section covers the essential stages needed for a minimal example.
+Before diving into WebGPU example code, some fundamental concepts must
+be introduced. This section covers the essential stages needed for a
+minimal example.
 
 \section{Pipelines}
-The WebGPU specification lays out GPU commands sequentially, with similarities to WebGL.
-It supports two different pipelines:
-The \textbf{compute pipeline} is responsible for executing parallel
-computations on the GPU hardware. It only consists of a single programmable
-stage, customized via the compute shader.
-While providing numerous benefits to parallel computations over CPU-executed code, for the sake of brevity, it won't be covered within this survey.
-This document mainly focuses on the \textbf{render pipeline}, which houses both the \textbf{vertex shader} and the \textbf{fragment shader}.
+The WebGPU specification lays out GPU commands sequentially, with
+similarities to WebGL. It supports two different pipelines: The
+\textbf{compute pipeline} is responsible for executing parallel
+computations on the GPU hardware. It only consists of a single
+programmable stage, customized via the compute shader. While providing
+numerous benefits to parallel computations over CPU-executed code, for
+the sake of brevity, it won't be covered within this survey. This
+document mainly focuses on the \textbf{render pipeline}, which houses
+both the \textbf{vertex shader} and the \textbf{fragment shader}.
 
 \section{Shaders}
-Shaders are programmable stages within GPU pipelines, written in a special shader language in order to adhere
-to the requirements of the GPU.
-The shading language for WebGPU is called WGSL, and will be introduced in chapter \ref{chap:PracticalExample}.
-There are two programmable stages within the render pipeline:
-The vertex shader and the fragment shader.
+Shaders are programmable stages within GPU pipelines, written in a
+special shader language in order to adhere to the requirements of the
+GPU. The shading language for WebGPU is called WGSL, and will be
+introduced in chapter \ref{chap:PracticalExample}. There are two
+programmable stages within the render pipeline: The vertex shader and
+the fragment shader.
 
 \subsection{Vertex Shader}
-Vertex shaders are responsible for defining all vertices of a desired primitive.
-Each vertex has a position and a set of attributes associated with it.
-Vertex coordinates are relative to the centre of the primitive, and must be defined per primitive.
-Additional colour values, required by the fragment shader in a later stage of the pipeline, must be appended here to allow pass-through.
-Image \ref{fig:vertex-01} illustrates simple example of a vertex shader for a triangular primitive.
+Vertex shaders are responsible for defining all vertices of a desired
+primitive. Each vertex has a position and a set of attributes associated
+with it. Vertex coordinates are relative to the centre of the primitive,
+and must be defined per primitive. Additional colour values, required by
+the fragment shader in a later stage of the pipeline, must be appended
+here to allow pass-through. Image \ref{fig:vertex-01} illustrates simple
+example of a vertex shader for a triangular primitive.
 
 \begin{figure}[tp]
 \centering
@@ -44,8 +50,7 @@ Image \ref{fig:vertex-01} illustrates simple example of a vertex shader for a tr
 {images/vertex-01.pdf}
 
 \caption[Vertex Shader, Example Illustration]
-{
-  An exemplary illustration of a vertex shader for a primitive triangle.
+{ An exemplary illustration of a vertex shader for a primitive triangle.
   The vertices V1, V2, V3 define the vertices of the primitive.
 \imgcredit{Created by the authors.}
 }
@@ -53,24 +58,30 @@ Image \ref{fig:vertex-01} illustrates simple example of a vertex shader for a tr
 \end{figure}
 
 \subsection{Intermediate Step}
-Following the vertex shader, the render pipeline contains an intermediate step that cannot be modified directly.
-First, the vertices are assembled into primitives.
-These primitives are subsequently clipped to fit within the bounding box of the viewport, before entering the rasterization stage.
-This rasterization stage transforms the primitive into rasterized points on the screen.
+Following the vertex shader, the render pipeline contains an
+intermediate step that cannot be modified directly. First, the vertices
+are assembled into primitives. These primitives are subsequently clipped
+to fit within the bounding box of the viewport, before entering the
+rasterization stage. This rasterization stage transforms the primitive
+into rasterized points on the screen.
 
 \subsection{Rasterization}
-The rasterization stage is not directly programmable like the vertex or fragment shaders,
-but it is a vital part of the rendering pipeline. During this stage, the vertex information
-is transformed into rasterized segments on the screen, corresponding to the available pixels in the
-viewport. Additionally, this stage includes the culling of obstructed polygons. Any front-facing
-polygons are rendered and evaluated, whilst all obstructed ones are discarded.
+The rasterization stage is not directly programmable like the vertex or
+fragment shaders, but it is a vital part of the rendering pipeline.
+During this stage, the vertex information is transformed into rasterized
+segments on the screen, corresponding to the available pixels in the
+viewport. Additionally, this stage includes the culling of obstructed
+polygons. Any front-facing polygons are rendered and evaluated, whilst
+all obstructed ones are discarded.
 
-The most performant way of rasterization is evaluating each available pixel at its centre.
-If that centre point is inside a primitive, the corresponding pixel should be coloured.
-Whilst being performant and fairly simple to execute, this leads to a stair-like effect on edges that
-should be smooth, often called "jaggies".
-Figure \ref{fig:rasterization} shows the naive implementation of the rasterization process.
-The rasterized points are shaded blue, all discarded pixels are white.
+The most performant way of rasterization is evaluating each available
+pixel at its centre. If that centre point is inside a primitive, the
+corresponding pixel should be coloured. Whilst being performant and
+fairly simple to execute, this leads to a stair-like effect on edges
+that should be smooth, often called "jaggies". Figure
+\ref{fig:rasterization} shows the naive implementation of the
+rasterization process. The rasterized points are shaded blue, all
+discarded pixels are white.
 
 \begin{figure}[tp]
 \centering
@@ -78,24 +89,29 @@ The rasterized points are shaded blue, all discarded pixels are white.
 {images/rasterization.pdf}
 
 \caption[Rasterization, Example Illustration]
-{
-  An exemplary illustration of the rasterization step for a primitive triangle.
-  Rasterized points inside the primitive are coloured in blue, whilst points outside are displayed white.
+{ An exemplary illustration of the rasterization step for a primitive
+  triangle. Rasterized points inside the primitive are coloured in blue,
+  whilst points outside are displayed white.
 \imgcredit{Created by the authors.}
 }
 \label{fig:rasterization}
 \end{figure}
 
-For most applications, it is desirable to reduce the stair-like jaggies that the rasterization process produces.
-This is often done through a process called Anti-Aliasing.
-WebGPU provides a built-in way to deal with aliasing by enabling a technique called multisampling for the
-rasterization process. This is done through optional configuration during the setup of the scene.
+For most applications, it is desirable to reduce the stair-like jaggies
+that the rasterization process produces. This is often done through a
+process called Anti-Aliasing. WebGPU provides a built-in way to deal
+with aliasing by enabling a technique called multisampling for the
+rasterization process. This is done through optional configuration
+during the setup of the scene.
 
-With multisampling enabled, each pixel is evaluated on multiple points, instead of just the centre.
-The sample points are deliberately placed near the edge, and are grouped in a sample mask.
-The final pixel value is the result of interpolating between all four point samples of the sample mask.
+With multisampling enabled, each pixel is evaluated on multiple points,
+instead of just the centre. The sample points are deliberately placed
+near the edge, and are grouped in a sample mask. The final pixel value
+is the result of interpolating between all four point samples of the
+sample mask.
 
-Figure \ref{fig:multisampling} illustrates the process of multisampling on an example triangle.
+Figure \ref{fig:multisampling} illustrates the process of multisampling
+on an example triangle.
 
 \begin{figure}[tp]
 \centering
@@ -103,10 +119,11 @@ Figure \ref{fig:multisampling} illustrates the process of multisampling on an ex
 {images/multisampling.pdf}
 
 \caption[Multisampling, Example Illustration]
-{
-  An exemplary illustration of multisampling during the rasterization step for a primitive triangle.
-  Sample points are indicated with red circles for two of the pixels. All pixels are evaluated with the same
-  sample mask, and the final pixel colour value is the result of interpolating between all sample points.
+{ An exemplary illustration of multisampling during the rasterization
+  step for a primitive triangle. Sample points are indicated with red
+  circles for two of the pixels. All pixels are evaluated with the same
+  sample mask, and the final pixel colour value is the result of
+  interpolating between all sample points.
 \imgcredit{Created by the authors.}
 }
 \label{fig:multisampling}
@@ -114,11 +131,12 @@ Figure \ref{fig:multisampling} illustrates the process of multisampling on an ex
 
 
 \subsection{Fragment Shader}
-The vertex shader provides vertices that define the shape of a primitive.
-Within the fragment shader, this primitive is coloured.
-The vertices enter this stage with a defined colour value, and the fragment shader interpolates between these values.
-It produces one fragment per rasterization point, and its execution is parallel.
-Figure \ref{fig:fragment-01} shows the desired output of this stage.
+The vertex shader provides vertices that define the shape of a
+primitive. Within the fragment shader, this primitive is coloured. The
+vertices enter this stage with a defined colour value, and the fragment
+shader interpolates between these values. It produces one fragment per
+rasterization point, and its execution is parallel. Figure
+\ref{fig:fragment-01} shows the desired output of this stage.
 
 \begin{figure}[tp]
 \centering
@@ -126,10 +144,10 @@ Figure \ref{fig:fragment-01} shows the desired output of this stage.
 {images/fragment-01.pdf}
 
 \caption[Fragment Shader, Example Illustration]
-{
-  An exemplary illustration of a fragment shader for a primitive triangle to showcase the desired output.
-  Each vertex is defined by its position and an associated colour value.
-  For a uniformly coloured triangle, all three colour values must be equal.
+{ An exemplary illustration of a fragment shader for a primitive
+  triangle to showcase the desired output. Each vertex is defined by its
+  position and an associated colour value. For a uniformly coloured
+  triangle, all three colour values must be equal.
 \imgcredit{Created by the authors.}
 }
 \label{fig:fragment-01}

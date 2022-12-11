@@ -3,64 +3,68 @@
 %  File    :  libraries.tex
 %
 %  Authors :  Pinheiro de Souza, Schintler, Steinkellner
-% 
+%
 %  Created :  22 Nov 2022
-% 
+%
 %----------------------------------------------------------------
 
 \chapter{Libraries}
 
 \label{chap:Libraries}
 
-Getting started with WebGL is quite simple. 
-One factor that makes it that simple are the many libraries that exist and provide an interface for WebGL.
-However the support of most libraries for WebGPU is still lacking even though we should expect a release this quarter.
+Getting started with WebGL is quite simple. One factor that makes it
+that simple are the many libraries that exist and provide an interface
+for WebGL. However the support of most libraries for WebGPU is still
+lacking even though we should expect a release this quarter.
 
 \section{Two.js}
 
-Two.js is one of the most prominent library for working in 2D, hence the name.
-Providing a drawing api for drawing in multiple contexts, e.g. svg, canvas and WebGL.\\
-On the forum of Two.js the developers provide a little inside into the development.
-Talking about the next steps of the library and if WebGPU will be supported.
-Stating that \begin{displayquote} "... a WebGPU renderer seems like the natural evolution of renderers in Two.js." \end{displayquote}\parencite{two_quote}.
-However also pointing to the fact that WebGPU is not released yet and thus not starting to work on it until there is an official release.
+Two.js is one of the most prominent library for working in 2D, hence the
+name. Providing a drawing api for drawing in multiple contexts, e.g.
+svg, canvas and WebGL. On the forum of Two.js the developers provide a
+little insight into the development. Talking about the next steps of the
+library and if WebGPU shall be supported. They conclude that
+\begin{displayquote} "... a WebGPU renderer seems like the natural
+evolution of renderers in Two.js."
+\end{displayquote}\parencite{two_quote}.
+However, they are also pointing to the fact that WebGPU is not released
+yet and thus will not work on it until there is an official release.
 
 \section{Three.js}
 
-Three.js is as the name suggests a 3D JavaScript library. 
-What Two.js is in the 2D domain in the 3D domain there is Three.js.\\
-In contrast to Two.js, Three.js is already actively working on implementing a WebGPU renderer.
-Currently there is already a WebGPU renderer implemented in Three.js that is usable. 
-Even though there are still some issues and not all of the features work as intended, it is still usable to a certain degree.
-Which is also visible by the several different examples that are already online \parencite{three_examples}.
-As well as in our own example that we created using Three.js and the WebGPU renderer. \\
+Three.js is as the name suggests a 3D JavaScript library. What Two.js is
+in the 2D domain in the 3D domain there is Three.js.
+In contrast to Two.js, Three.js is already actively working on
+implementing a WebGPU renderer. Currently there is already a WebGPU
+renderer implemented in Three.js that is usable. Even though there are
+still some issues and not all of the features work as intended, it is
+still usable to a certain degree. Which is also visible by the several
+different examples that are already online \parencite{three_examples}.
+As well as in our own example that we created using Three.js and the
+WebGPU renderer. 
 
-Listing \ref{code:three-scene} shows the required setup for a simple scene in Three.js. \\
-First, one has to create each object invidually. Afterwards, they can be added to the scene.
+Listing \ref{code:three-scene} shows the required setup for a simple
+scene in Three.js. 
+First, one has to create each object invidually. Afterwards, they can be
+added to the scene.
 
 \begin{samepage}
-\lstinputlisting[
-  float=tp,
-  xleftmargin=0cm,              % no extra margins for floats
+\lstinputlisting[ float=tp, xleftmargin=0cm,
+  % no extra margins for floats
   xrightmargin=0cm,             % no extra margins for floats
-  basicstyle=\footnotesize\ttfamily,
-  frame=shadowbox,
-  numbers=left,
-  caption={[Code Snippet: Three.js Example]
-  {
-    Scene, camera and WebGPU setup in Three.js, followed by simple object creation.
+  basicstyle=\footnotesize\ttfamily, frame=shadowbox, numbers=left,
+  caption={[Code Snippet: Three.js Example] { Scene, camera and WebGPU
+  setup in Three.js, followed by simple object creation.
     \imgcredit{Created by the authors.}
-  }},
-  language=TypeScript,
-  firstnumber=30,
-  label=code:three-scene
-  ]
+  }}, language=TypeScript, firstnumber=30, label=code:three-scene ]
   {listings/three-js-example.ts}
 \end{samepage}
 
 
-After adding hover interactivity it is possible to get create a scene that reacts to the position of the mouse cursor.
-The initial state of the scene can be seen in figure \ref{fig:three_img1}. The results of the hover effect are visible in figure \ref{fig:three_img2}.
+After adding hover interactivity it is possible to get create a scene
+that reacts to the position of the mouse cursor. The initial state of
+the scene can be seen in figure \ref{fig:three_img1}. The results of the
+hover effect are visible in figure \ref{fig:three_img2}.
 
 \begin{figure}[tp]
   \centering
@@ -68,8 +72,8 @@ The initial state of the scene can be seen in figure \ref{fig:three_img1}. The r
   {images/three_example_img1.png}
   
   \caption[Three.js Example Without Mouse Interactivity]
-  {
-  A simple Three.js example without the mouse hovering over any object.
+  { A simple Three.js example without the mouse hovering over any
+  object.
   \imgcredit{Created by the authors.}
   }
   \label{fig:three_img1}
@@ -81,8 +85,8 @@ The initial state of the scene can be seen in figure \ref{fig:three_img1}. The r
   {images/three_example_img2.png}
   
   \caption[Three.js Example With Mouse Interactivity]
-  {
-  A simple Three.js example with the mouse hovering over multiple objects.
+  { A simple Three.js example with the mouse hovering over multiple
+  objects.
   \imgcredit{Created by the authors.}
   }
   \label{fig:three_img2}
@@ -90,46 +94,42 @@ The initial state of the scene can be seen in figure \ref{fig:three_img1}. The r
 
 \section{Babylon.js}
 
-Last but not least there is Babylon.js.
-Babylon.js started the integration process for WebGPU already back in 2019 \parencite{babylon_start_webgpu}. 
-The first usable WebGPU renderer in Babylon.js was released with version 5.0 of the library \parencite{babylon_released}.
-Another milestone that Babylon.js was able to achieve was to got feature parity with the WebGL renderer back in January 2022 \parencite{babylon_parity}.
-Thus providing full WebGPU support for the library.
+Last but not least there is Babylon.js. Babylon.js started the
+integration process for WebGPU already back in 2019
+\parencite{babylon_start_webgpu}. The first usable WebGPU renderer in
+Babylon.js was released with version 5.0 of the library
+\parencite{babylon_released}. Another milestone that Babylon.js was able
+to achieve was to got feature parity with the WebGL renderer back in
+January 2022 \parencite{babylon_parity}. Thus providing full WebGPU
+support for the library.
 
-Similar to Three.js it is possible to create an example scene quite easily.
-First, one has to create a scene and specify the engine one wants to use.
-After this we can start creating and adding objects to the scene, as shown in listing \ref{code:babylon-scene}.
+Similar to Three.js it is possible to create an example scene quite
+easily. First, one has to create a scene and specify the engine one
+wants to use. After this we can start creating and adding objects to the
+scene, as shown in listing \ref{code:babylon-scene}.
 
 \begin{samepage}
-  \lstinputlisting[
-    float=tp,
-    xleftmargin=0cm,              % no extra margins for floats
+  \lstinputlisting[ float=tp, xleftmargin=0cm,
+    % no extra margins for floats
     xrightmargin=0cm,             % no extra margins for floats
-    basicstyle=\footnotesize\ttfamily,
-    frame=shadowbox,
-    numbers=left,
-    caption={[Code Snippet: Babylon Example]
-    {
-      Scene, camera and WebGPU setup in Babylon.js, followed by simple object creation.
+    basicstyle=\footnotesize\ttfamily, frame=shadowbox, numbers=left,
+    caption={[Code Snippet: Babylon Example] { Scene, camera and WebGPU
+    setup in Babylon.js, followed by simple object creation.
       \imgcredit{Created by the authors.}
-    }},
-    language=TypeScript,
-    firstnumber=21,
-    label=code:babylon-scene
-    ]
+    }}, language=TypeScript, firstnumber=21, label=code:babylon-scene ]
     {listings/babylon-js-example.ts}
 \end{samepage}
 
-Figure \ref{fig:babylon_example_img1} shows an interactive example of a Babylon.js scene where the user can drag and drop
-a cube.
+Figure \ref{fig:babylon_example_img1} shows an interactive example of a
+Babylon.js scene where the user can drag and drop a cube.
 \begin{figure}[tp]
   \centering
   \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
   {images/babylon_example_img1.png}
   
   \caption[Babylon.js Example With Mouse Interactivity]
-  {
-  Simple interactive example of a Babylon.js scene where the user can drag and drop a cube.
+  { Simple interactive example of a Babylon.js scene where the user can
+  drag and drop a cube.
   \imgcredit{Created by the authors.}
   }
   \label{fig:babylon_example_img1}
