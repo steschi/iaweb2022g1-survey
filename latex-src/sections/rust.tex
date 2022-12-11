@@ -8,28 +8,6 @@
 % 
 %----------------------------------------------------------------
 
-\newcommand*{\rustsnippet}[3]{
-  \inputminted[
-    frame=lines,
-    framesep=2mm,
-    baselinestretch=1.2,
-    linenos,
-    fontsize=\scriptsize,
-    firstline=#1,
-    lastline=#2
-  ]{rust}{#3}}
-
-\newcommand*{\rust}[1]{
-  \inputminted[
-    frame=lines,
-    framesep=2mm,
-    baselinestretch=1.2,
-    linenos,
-    fontsize=\scriptsize,
-    breaklines=true,
-    highlightlines={30-33,42-49}
-  ]{rust}{#1}}
-
 
 \chapter{Rust}
 
@@ -66,25 +44,11 @@ Listing \ref{code:cargo} shows the \emph{Cargo.toml} file used in our minimal ex
       A simple \emph{Cargo.toml} file for WebAssembly and WebGPU in Rust.
       \imgcredit{Created by the authors.}
     }},
-    language=JavaScript,
     firstnumber=1,
     label=code:cargo
     ]
     {listings/wasm/Cargo.toml}
 \end{samepage}
-
-
-%\begin{listing}
-%  \centering
-%  \rust{../software/packages/rust-example/wasm/Cargo.toml}
-%
-%  \caption[Code Snippet: Cargo.toml]
-%  {
-%    A simple \emph{Cargo.toml} file for WebAssembly and WebGPU in Rust.
-%    \imgcredit{Created by the authors.}
-%  }
-%  \label{code:cargo}
-%\end{listing}
 
 
 Once packages are properly setup and a module bundler like Vite or Webpack is configured to handle WASM files properly,
@@ -112,24 +76,12 @@ Afterwards, a new canvas element for WebGPU is pushed to the DOM, as demonstrate
       Example of setting up a canvas element inside the HTML DOM via Rust.
       \imgcredit{Created by the authors.}
     }},
-    language=JavaScript,
+    language=Rust,
     firstnumber=165,
     label=code:rust-canvas
     ]
     {listings/wasm/lib_canvas.rs}
 \end{samepage}
-
-%\begin{listing}
-%  \centering
-%  \rustsnippet{165}{178}{../software/packages/rust-example/wasm/src/lib.rs}
-%
-%  \caption[Code Snippet: Canvas Setup]
-%  {
-%    Example of setting up a canvas element inside the HTML DOM via Rust.
-%    \imgcredit{Created by the authors.}
-%  }
-%  \label{code:rust-canvas}
-%\end{listing}
 
 
 % --------------------------------------------------------------------------- %
@@ -153,26 +105,12 @@ of the GPU handle, as demonstrated in listing \ref{code:rust-handle}.
       specified window. Afterwards, an adapter is created and the handle to the GPU is requested.
       \imgcredit{Created by the authors.}
     }},
-    language=JavaScript,
+    language=Rust,
     firstnumber=23,
     label=code:rust-handle
     ]
     {listings/wasm/lib_handle.rs}
 \end{samepage}
-
-%\begin{listing}
-%  \centering
-%  \rustsnippet{23}{51}{../software/packages/rust-example/wasm/src/lib.rs}
-%
-%  \caption[Code Snippet: Backend, surface, adapter, and GPU handle setup]
-%  {
-%    Example code of setting up the initial backend for WebGPU, followed by surface creation on the
-%    specified window. Afterwards, an adapter is created and the handle to the GPU is requested.
-%    \imgcredit{Created by the authors.}
-%  }
-%  \label{code:rust-handle}
-%\end{listing}
-
 
 % --------------------------------------------------------------------------- %
 % Section: Shader and Viewport Configuration %
@@ -197,24 +135,12 @@ The required Rust code to include the shader is shown in listing \ref{code:rust-
       Example code of a simple triangular vertex and fragment shader pair.
       \imgcredit{Created by the authors.}
     }},
-    language=JavaScript,
+    language=WGSL,
     firstnumber=1,
     label=code:rust-wgsl
     ]
     {listings/wasm/shader.wgsl}
 \end{samepage}
-
-%\begin{listing}
-%  \centering
-%  \rust{../software/packages/rust-example/wasm/src/shader.wgsl}
-%
-%  \caption[Code Snippet: WGSL Shader Code]
-%  {
-%    Example code of a simple triangular vertex and fragment shader pair.
-%    \imgcredit{Created by the authors.}
-%  }
-%  \label{code:rust-wgsl}
-%\end{listing}
 
 \begin{samepage}
   \lstinputlisting[
@@ -229,24 +155,12 @@ The required Rust code to include the shader is shown in listing \ref{code:rust-
       Example code of accessing the WebGPU shader inside our Rust example and configuring the viewport.
       \imgcredit{Created by the authors.}
     }},
-    language=JavaScript,
+    language=Rust,
     firstnumber=53,
     label=code:rust-shader
     ]
     {listings/wasm/lib_shader.rs}
 \end{samepage}
-
-%\begin{listing}
-%  \centering
-%  \rustsnippet{53}{65}{../software/packages/rust-example/wasm/src/lib.rs}
-%
-%  \caption[Code Snippet: Shader and Viewport Setup]
-%  {
-%    Example code of accessing the WebGPU shader inside our Rust example and configuring the viewport.
-%    \imgcredit{Created by the authors.}
-%  }
-%  \label{code:rust-shader}
-%\end{listing}
 
 
 % --------------------------------------------------------------------------- %
@@ -269,22 +183,9 @@ as demonstrated in listing \ref{code:rust-render}.
       Example code of setting up an event loop to redraw on every frame in our Rust example.
       \imgcredit{Created by the authors.}
     }},
-    language=JavaScript,
+    language=Rust,
     firstnumber=181,
     label=code:rust-render
     ]
     {listings/wasm/lib_render.rs}
 \end{samepage}
-
-%\begin{listing}
-%  \centering
-%  \rustsnippet{181}{192}{../software/packages/rust-example/wasm/src/lib.rs}
-%
-%  \caption[Code Snippet: Event Loop Setup]
-%  {
-%    Example code of setting up an event loop to redraw on every frame in our Rust example.
-%    \imgcredit{Created by the authors.}
-%  }
-%  \label{code:rust-render}
-%\end{listing}
-

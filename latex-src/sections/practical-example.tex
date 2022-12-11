@@ -8,30 +8,6 @@
 % 
 %----------------------------------------------------------------
 
-\newcommand*{\codesnippet}[4]{
-  \inputminted[
-    frame=lines,
-    framesep=2mm,
-    baselinestretch=1.2,
-    linenos,
-    fontsize=\scriptsize,
-    firstline=#1,
-    lastline=#2
-  ]{#3}{#4}}
-
-
-\newcommand*{\code}[1]{
-  \inputminted[
-    frame=lines,
-    framesep=2mm,
-    baselinestretch=1.2,
-    linenos,
-    fontsize=\scriptsize,
-    breaklines=true,
-    highlightlines={30-33,42-49}
-  ]{typescript}{#1}}
-
-
 \chapter{Practical Example of using WebGPU}
 
 \label{chap:PracticalExample}
@@ -93,25 +69,13 @@ into its numeric values. The additional function \emph{encodeVertices()} is desi
       An exemplary illustration of how to encode vertex information for use in WebGPU
       \imgcredit{Created by the authors.}
     }},
-    language=JavaScript,
+    language=TypeScript,
     firstnumber=1,
     label=code:vertex-encode
     ]
     {listings/vertex.ts}
 \end{samepage}
 
-%\begin{listing}
-%
-%  \centering
-%  \code{../software/packages/shared/src/vertex.ts}
-%
-%  \caption[Code Snippet: Vertex Encoding]
-%  {
-%    An exemplary illustration of how to encode vertex information for use in WebGPU
-%    \imgcredit{Created by the authors.}
-%  }
-%  \label{code:vertex-encode}
-%\end{listing}
 
 \subsection{Step 2 - Creating a Buffer}
 
@@ -134,25 +98,12 @@ to hand over control to the GPU.
       to use WebGPU.
       \imgcredit{Created by the authors.}
     }},
-    language=JavaScript,
+    language=TypeScript,
     firstnumber=1,
     label=code:create-buffer
     ]
     {listings/helper.ts}
 \end{samepage}
-
-%\begin{listing}
-%  \centering
-%  \codesnippet{4}{22}{typescript}{../software/packages/webgpu-simple/src/helpers.ts}
-%
-%  \caption[Code Snippet: \emph{createBuffer}]
-%  {
-%    An exemplary illustration of how instructions and data of a 3D scene have to be handled
-%    to use WebGPU.
-%    \imgcredit{Created by the authors.}
-%  }
-%  \label{code:create-buffer}
-%\end{listing}
 
 
 \subsection{Step 3 - WGSL Shader Code}
@@ -176,27 +127,13 @@ executed in parallel for each rasterized pixel of the scene to define the actual
       An exemplary code snippet of how to write WGSL Shader Code
       \imgcredit{Created by the authors.}
     }},
-    language=JavaScript,
+    language=WGSL,
     firstnumber=1,
     label=code:shader-code
     ]
     {listings/shader.wgsl}
 \end{samepage}
 
-%\begin{listing}
-%
-%  \centering
-%  \usemintedstyle{xcode}
-%  \codesnippet{1}{19}{glsl}{../software/packages/webgpu-simple/src/shader.wgsl}
-%  \usemintedstyle{default}
-%
-%  \caption[Code Snippet: WebGPU Shader Code]
-%  {
-%    An exemplary code snippet of how to write WGSL Shader Code
-%    \imgcredit{Created by the authors.}
-%  }
-%  \label{code:shader-code}
-%\end{listing}
 
 \subsection{Step 4 - Setting up the Final Pipeline}
 
@@ -218,23 +155,9 @@ Within this step, the shader code of listing \ref*{section:shader-code} is passe
       An exemplary illustration of how to set up a WebGPU pipeline
       \imgcredit{Created by the authors.}
     }},
-    language=JavaScript,
+    language=TypeScript,
     firstnumber=11,
     label=code:pipeline-setup
     ]
     {listings/main.ts}
 \end{samepage}
-
-%\begin{listing}
-%
-%  \centering
-%  \codesnippet{11}{70}{typescript}{../software/packages/webgpu-simple/src/main.ts}
-%
-%  \caption[Code Snippet: WebGPU Pipeline]
-%  {
-%    An exemplary illustration of how to set up a WebGPU pipeline
-%    \imgcredit{Created by the authors.}
-%  }
-%  \label{code:pipeline-setup}
-%\end{listing}
-

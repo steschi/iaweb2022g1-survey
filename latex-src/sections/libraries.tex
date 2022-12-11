@@ -8,32 +8,6 @@
 % 
 %----------------------------------------------------------------
 
-\newcommand*{\codeThreejs}[1]{
-  \inputminted[
-    frame=lines,
-    framesep=2mm,
-    baselinestretch=1.2,
-    linenos,
-    fontsize=\scriptsize,
-    breaklines=true,
-    highlightlines={30-39,43-49,81-84},
-    firstline=30,
-    lastline=84
-  ]{typescript}{#1}}
-
-\newcommand*{\codeBabylon}[1]{
-  \inputminted[
-    frame=lines,
-    framesep=2mm,
-    baselinestretch=1.2,
-    linenos,
-    fontsize=\scriptsize,
-    breaklines=true,
-    highlightlines={21-27,39-45},
-    firstline=21,
-    lastline=45
-  ]{typescript}{#1}}
-
 \chapter{Libraries}
 
 \label{chap:Libraries}
@@ -77,24 +51,12 @@ First, one has to create each object invidually. Afterwards, they can be added t
     Scene, camera and WebGPU setup in Three.js, followed by simple object creation.
     \imgcredit{Created by the authors.}
   }},
-  language=JavaScript,
+  language=TypeScript,
   firstnumber=30,
   label=code:three-scene
   ]
   {listings/three-js-example.ts}
 \end{samepage}
-
-
-%begin{listing}
-%  \centering
-%  \codeThreejs{../software/packages/threejs-example/src/main.ts}
-%  \caption[Code Snippet: Three.js Example]
-%  {
-%    Scene, camera and WebGPU setup in Three.js, followed by simple object creation.
-%    \imgcredit{Created by the authors.}
-%  }
-%  \label{code:three-scene}
-%\end{listing}
 
 
 After adding hover interactivity it is possible to get create a scene that reacts to the position of the mouse cursor.
@@ -151,23 +113,12 @@ After this we can start creating and adding objects to the scene, as shown in li
       Scene, camera and WebGPU setup in Babylon.js, followed by simple object creation.
       \imgcredit{Created by the authors.}
     }},
-    language=JavaScript,
+    language=TypeScript,
     firstnumber=21,
     label=code:babylon-scene
     ]
     {listings/babylon-js-example.ts}
 \end{samepage}
-
-%\begin{listing}
-%  \centering
-%  \codesnippet{19}{55}{typescript}{../software/packages/babylon-js-example/src/main.ts}
-%  \caption[Code Snippet: Babylon Example]
-%  {
-%    Scene, camera and WebGPU setup in Babylon.js, followed by simple object creation.
-%    \imgcredit{Created by the authors.}
-%  }
-%  \label{code:babylon-scene}
-%\end{listing}
 
 Figure \ref{fig:babylon_example_img1} shows an interactive example of a Babylon.js scene where the user can drag and drop
 a cube.
