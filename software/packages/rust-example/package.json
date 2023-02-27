@@ -7,7 +7,7 @@
     "wasm": "cross-env RUSTFLAGS=--cfg=web_sys_unstable_apis wasm-pack build ./wasm --target web",
     "wasm-hmr": "chokidar \"./wasm/src\" \"**/*.toml\" -c \"yarn wasm\" --initial --debounce 500",
     "dev": "concurrently \"yarn wasm-hmr\" \"vite\"",
-    "build": "yarn wasm && tsc && vite build",
+    "build": "yarn wasm && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {

@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "babylonjs": "^5.32.1",
+    "babylonjs": "5.32.1",
     "typescript": "^4.6.4",
     "vite": "^3.2.3"
   },

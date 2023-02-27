@@ -61,10 +61,10 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-babylonjs@^5.32.1:
-  version "5.35.1"
-  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-5.35.1.tgz#0bd4981bb0402b525ba4a560fbec6ff4c7202fa8"
-  integrity sha512-oNkKHRSv/qVIMwlfAb07Cg8ptF7bDZKJV4T7dfshI0Em2MTs/j8kWTntNd65kO8J3c/o92k+7cDxN15UYTyFew==
+babylonjs@5.32.1:
+  version "5.32.1"
+  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-5.32.1.tgz#526b50e43d7b7394884d9ca708216ed3cf5a8e81"
+  integrity sha512-MXuIu2NIIDHQq+IyO4vWUfqsvnDxQRWofGC4LQXAYvfp5N8w2veHcycNbhB48s4PTm5BHHr+GiYOm61asS5PDg==
 
 balanced-match@^1.0.0:
   version "1.0.2"

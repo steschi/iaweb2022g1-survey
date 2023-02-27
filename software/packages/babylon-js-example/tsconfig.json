@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "typeRoots": ["../../node_modules/@webgpu/types", "../../node_modules/@types"],
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -16,10 +15,5 @@
     "noImplicitReturns": true,
     "skipLibCheck": true
   },
-  "references": [
-    {
-      "path": "../shared"
-    }
-  ],
   "include": ["src"]
 }
