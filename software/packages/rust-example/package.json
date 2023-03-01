@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "precompile": "yarn wasm",
     "wasm": "cross-env RUSTFLAGS=--cfg=web_sys_unstable_apis wasm-pack build ./wasm --target web",
     "wasm-hmr": "chokidar \"./wasm/src\" \"**/*.toml\" -c \"yarn wasm\" --initial --debounce 500",
     "dev": "concurrently \"yarn wasm-hmr\" \"vite\"",
